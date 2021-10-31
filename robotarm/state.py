@@ -3,6 +3,8 @@
 State object class Module for the Robotarm package
 """
 
+import json
+
 class State:
     """
     State object class
