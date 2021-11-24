@@ -1,0 +1,50 @@
+#!/usr/bin/python3
+"""
+robot-arm v0.0.2
+simple script to run commands
+from anywhere in project directories
+
+just pass in the command with arguments and it'll run it appropriately
+
+Enter project root directory
+"""
+import os, sys
+
+# it'll try to get your project root directory set it as an environmental variable
+PROJECT_ROOT = os.environ.get("PROJECT_ROOT")
+
+exe_cmd = "manage.py"
+
+common_args = {
+    'makemigrations': 'making migrations...',
+    'migrate': 'migrating tables...',
+    'runserver': 'running server...',
+}
+
+def arm(args, exe=exe_cmd):
+
+    if args in common_args.keys():
+    	print(f"{common_args[args]}")
+    else:
+    	print(f"okay are you sure {args} is a {exe_cmd} command lets see...")
+
+    if exe not in os.listdir():
+        try:
+            if PROJECT_ROOT:
+            	os.chdir(PROJECT_ROOT)
+            os.system(f"python {exe} {args}")
+        except Exception as error:
+            print("error occured: ", error)
+    else:
+        try:
+            os.system(f"python {exe} {args}")
+        except Exception as error:
+            print("error occured: ", error)
+
+if __name__ == "__main__":
+    args_len = len(sys.argv)
+    if args_len >= 2:
+    	arm(sys.argv[1])
+    else:
+        script_name = f'{sys.argv[0]}'.split('/')[-1]
+        print(f"Usage: {script_name} <option>")
