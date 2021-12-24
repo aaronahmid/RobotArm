@@ -37,3 +37,7 @@ class BaseState:
 
     def to_dict(self):
         return self.__dict__
+
+    @staticmethod
+    def to_json():
+        pass
