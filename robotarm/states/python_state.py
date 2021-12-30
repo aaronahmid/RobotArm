@@ -5,7 +5,7 @@ State object class Module for the Robotarm package
 import json
 
 
-class BaseState:
+class PythonState:
     """
     State object class
 
@@ -23,11 +23,11 @@ class BaseState:
     project_root = '.'
     project_name = '.'
     project_version = '0.0.1'
-    language = ''
+    runtime_version = ''
     framework_library = ''
     enable_git = True
     database = ''
-    setup_env = False
+    setup_env = True
     requirements = ''
 
     def __init__(self, *args, **kwargs):

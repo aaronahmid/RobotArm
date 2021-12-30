@@ -1,7 +1,0 @@
-
-entry: robotarm
-options: [setup| load| delete| --version[-v]]
-
-- setting up project environment
- command: robotarm setup [params: [-n, --name] [-d, --project_dir] [-r --runtime]]
-                         optionnal/extra params: [-vn, --venv-name] [-f, --framework] [-db, --database]
