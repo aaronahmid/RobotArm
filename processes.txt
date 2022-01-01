@@ -1,0 +1,18 @@
+
+entry: robotarm
+options: [setup| load| delete| --version[-v]]
+
+- setting up project environment
+ command: robotarm setup [params: [-n, --name] [-d, --project_dir] [-r --runtime]]
+                         optionnal/extra params: [-vn, --venv-name] [-f, --framework] [-db, --database]
+
+
+Components:
+  - State Handler: handels the creation, retrieval, updating, and deletion of states
+  - command Handler: handles and execute appropiate commands
+  - state/program entry point: resposible for parsing the cmd args and calling the appropiate state
+  - state file_storage handler: stores the current state info in a json file
+
+  states
+  - Python state: The Base State that every other state would inherit from
+  - substates (django state, flask state) : substates that would inherit from PythonState
