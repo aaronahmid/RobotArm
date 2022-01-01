@@ -1,0 +1,11 @@
+{
+    "project_root": ".",
+    "project_name": "webapp",
+    "project_version": "0.0.1",
+    "runtime_version": "python3",
+    "framework_library": "django",
+    "enable_git": true,
+    "database": "",
+    "setup_env": true,
+    "requirements": "requirements.txt"
+}
