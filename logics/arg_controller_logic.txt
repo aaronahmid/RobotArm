@@ -1,0 +1,14 @@
+
+- check if args_list is a list:
+    if list
+        pass
+    not list
+        raise Error(Argument must be a list)
+
+- pop args_list[0] as base_api_endpoint
+
+- pop next arg and check if it matches any controller
+    if match:
+        call controller and pass remaining args
+
+
