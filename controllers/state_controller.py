@@ -1,7 +1,6 @@
 """
 State Controller Module
 """
-from email import header
 from controllers import proxy_url
 import requests
 
@@ -16,7 +15,9 @@ class StateController:
         stop: accepts a <state_id>, sends a request to the /statest/stop
     """
 
-    __base_api = proxy_url + '/api/states/'
+
+    __base_api = proxy_url + '/states'
+
 
     def create(self, args):
         """

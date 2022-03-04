@@ -21,6 +21,10 @@ TEST_CONTROLLERS = {
 
 }
 
+API_STATUS_CONTROLLERS = {
+    'health': 'controllers.APIStatusController().health_check',
+}
+
 if __name__ == '__main__':
     # maps keys to controller classes
     options = {
@@ -29,8 +33,9 @@ if __name__ == '__main__':
         '-s': STATE_CONTROLLERS,
         '-c': COMMAND_CONTROLLERS,
         '-t': TEST_CONTROLLERS,
-        '-p': 'Pipeline controller/handler'
-    }
+        '-p': 'Pipeline controller/handler',
+        'status': API_STATUS_CONTROLLERS,
+}
 
     # extract file name and remove it
     args = sys.argv
