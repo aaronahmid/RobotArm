@@ -5,7 +5,7 @@ RobotArm entry script v0.01
 import controllers
 import sys
 
-# maps keys to controllers
+# maps keys to controller method
 STATE_CONTROLLERS = {
     'create': 'controllers.StateController().create',
     'load': 'controllers.StateController().load',
@@ -69,10 +69,11 @@ if __name__ == '__main__':
         else:
             exit(arm_usage)
 
-    # builds controller path by evaluating fails if
-    # controller commands doesn't exists
+    # builds controller path 
+    # fails if
+    # controller method doesn't exists
     try:
         ct = options[option]
-        eval(ct[args[0]])(args)
+        eval(ct[args[0]])(args) # passes all arguments into controller method for now
     except KeyError:
         exit('Unknown option command')
