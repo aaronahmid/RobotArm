@@ -2,14 +2,15 @@
 """
 RobotArm API config file
 """
-
-from api.views import api_views
+import pathlib
+from armservice.views import api_views
 from flask import (
     Flask,
     make_response,
     jsonify
 )
-from api import getenv
+from armservice import getenv
+
 
 # initialize flask app 
 app = Flask(__name__)

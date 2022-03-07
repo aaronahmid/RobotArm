@@ -2,11 +2,11 @@
 """
 API index views module
 """
-from api.views import app_views
+from armservice.views import api_views
 from flask import jsonify
 
 
-@app_views.route('/status')
+@api_views.route('/status')
 def status():
     """
     Returns json response of api status

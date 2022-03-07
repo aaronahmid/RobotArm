@@ -1,0 +1,14 @@
+
+[Unit]
+Description=RobotArm API service
+After=multi-user.target
+
+[Service]
+Type=Simple
+WorkingDirectory=/home/krummitz/Desktop/Do Not Open/Robot-Arm/
+ExecStart=/home/krummitz/ALX-HOLBERTON/alx-venv/bin/python3 -m gunicorn -b 0.0.0.0:5555 -w 4 armservice.app:app
+Restart=always
+
+
+[Install]
+WantedBy=multi-user.target
