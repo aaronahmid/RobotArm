@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-RobotArm API config file
+RobotArm API service config file
 """
 import pathlib
 from armservice.views import api_views
