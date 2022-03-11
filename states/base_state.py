@@ -12,6 +12,7 @@ class BaseState:
     """
     BaseState for future class definitions
     """
+    __current_state = ''
     def __init__(self, *args, **kwargs):
         """
         Initializes base model with an id
@@ -37,4 +38,3 @@ class BaseState:
         if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]
         return new_dict
-       

@@ -16,7 +16,7 @@ class DjangoState(BaseState):
         'migrate': 'migrating your data',
         'shell': 'starting shell'
     }
-    enrty_command = 'manage.py'
+    entry_command = 'manage.py'
 
     def __init__(self, *args, **kwargs):
         """
@@ -28,3 +28,4 @@ class DjangoState(BaseState):
         """
         would perform makemigration and migrate
         """
+        pass

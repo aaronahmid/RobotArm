@@ -5,8 +5,14 @@ Contains the FileStorage class
 
 import json
 import states
+from states.base_state import BaseState
+from states.django_state import DjangoState
 
-classes = {"DjangoState": DjangoState, "BaseStatel": BaseState, "FlaskState": FlaskState}
+classes = {
+    "DjangoState": DjangoState,
+    "BaseStatel": BaseState,
+    #"FlaskState": FlaskState
+    }
 
 
 class JsonFileStorage:
@@ -15,7 +21,9 @@ class JsonFileStorage:
     # string - path to the JSON file
     __file_path = "states.json"
     # dictionary - empty but will store all states by id
-    __states = {}
+    __states = {
+        'current_state': ''
+    }
 
     def all(self, cls=None):
         """returns the dictionary __states"""
@@ -23,7 +31,8 @@ class JsonFileStorage:
             new_dict = {}
             for key, value in self.__states.items():
                 if cls == value.__class__ or cls == value.__class__.__name__:
-                    new_dict[key] = value
+                    if key is not 'current_state':
+                        new_dict[key] = value
             return new_dict
         return self.__states
 
@@ -54,7 +63,7 @@ class JsonFileStorage:
     def delete(self, obj=None):
         """delete obj from __states if it's inside"""
         if obj is not None:
-            key = obj.__class__.__name__ + '.' + obj.id
+            key = obj.id
             if key in self.__states:
                 del self.__states[key]
 
@@ -68,8 +77,8 @@ class JsonFileStorage:
         None if not found
         """
 
-        all_cls = models.storage.all()
-        for value in all_cls.values():
+        all_states = states.storage.all()
+        for value in all_states.values():
             if (value.id == id):
                 return value
 
@@ -84,8 +93,8 @@ class JsonFileStorage:
         if not cls:
             count = 0
             for clas in all_class:
-                count += len(models.storage.all(clas).values())
+                count += len(states.storage.all(clas).values())
         else:
-            count = len(models.storage.all(cls).values())
+            count = len(states.storage.all(cls).values())
 
         return count
