@@ -2,7 +2,7 @@
 """
 contains Django State
 """
-from ast import arg
+from click import command
 from states.base_state import BaseState
 
 
@@ -10,13 +10,14 @@ class DjangoState(BaseState):
     """
      A django State
     """
-    commands = {
-        "runserver": 'spinning up development server',
-        'makemigrations': 'creating migrations',
-        'migrate': 'migrating your data',
-        'shell': 'starting shell'
-    }
     entry_command = 'manage.py'
+    commands = {
+        "runserver": ['runserver', 'spinning up development server'],
+        'makemigrations': ['makemigrations', 'creating migrations'],
+        'migrate': ['migrate', 'migrating your data',],
+        'shell': ['shell', 'starting shell'],
+        'make_superuser': ['createsuperuser', 'creating a super user'],
+    }
 
     def __init__(self, *args, **kwargs):
         """

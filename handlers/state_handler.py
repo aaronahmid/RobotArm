@@ -1,8 +1,10 @@
 """
 Contains Hadler for handling states related funtions
 """
+from logging import exception
+from states.django_state import DjangoState
 import states
-
+import yaml
 
 class StateHandler:
     """
@@ -44,7 +46,7 @@ class StateHandler:
         state_name = self.setCurrentState(id)
         return state_name
 
-    def createState(self, file_name):
+    def createState(self, **kwargs):
         """
         Parses a Yaml File into a python native dictionary objects
         and creats a state
@@ -55,15 +57,18 @@ class StateHandler:
         Returns:
             
         """
+        file_name = kwargs['file']
         yaml_dict = self.parseYamlFile(file_name)
 
         if yaml_dict:
             framework = yaml_dict['framework']
-            try:
-                eval(self.SUPPORTED_FRAMEWORKS[framework])(**yaml_dict)
-                states.storage.save()
-            except KeyError:
-                exit(f'Oops {framework} not supported yet')
+
+            if framework in self.SUPPORTED_FRAMEWORKS.keys():
+                state = eval(self.SUPPORTED_FRAMEWORKS[framework])(**yaml_dict)
+                state.save()
+                return state
+            else:
+                exit('Unsurppoted framework')
 
     def deleteState(self, id):
         """
@@ -79,3 +84,22 @@ class StateHandler:
             states.storage.delete(id)
         except Exception:
             return None
+            
+    @staticmethod
+    def parseYamlFile(file):
+        """
+        tries to open and parse a yaml file to dictionary object
+        """
+        try:
+            with open(f'{file}', mode='r', encoding='utf8') as file:
+                yaml_dict = yaml.full_load(file)
+                return yaml_dict
+        except FileNotFoundError:
+            print("file not found")
+    
+    @staticmethod
+    def all_states():
+        """
+        retrieves all states objects
+        """
+        return states.storage.all()

@@ -31,7 +31,7 @@ class JsonFileStorage:
             new_dict = {}
             for key, value in self.__states.items():
                 if cls == value.__class__ or cls == value.__class__.__name__:
-                    if key is not 'current_state':
+                    if key != 'current_state':
                         new_dict[key] = value
             return new_dict
         return self.__states
@@ -46,7 +46,8 @@ class JsonFileStorage:
         """serializes __states to the JSON file (path: __file_path)"""
         json_states = {}
         for key in self.__states:
-            json_states[key] = self.__states[key].to_dict()
+            if key != 'current_state':
+                json_states[key] = self.__states[key].to_dict()
         with open(self.__file_path, 'w') as f:
             json.dump(json_states, f)
 

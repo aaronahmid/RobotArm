@@ -16,7 +16,7 @@ class StateController:
     """
 
 
-    __base_api = proxy_url + '/states'
+    __base_api = proxy_url + '/states/'
 
 
     def create(self, args):
@@ -25,8 +25,7 @@ class StateController:
         development environment state
 
         Example:
-        curl -H "Content-Type" -X POST -d '{"file_name": "armfile"}' \
-            http://127.0.0:5000/api/states/create/
+        curl -H "Content-Type" -X POST -d '{"file_name": "armfile"}' http://127.0.0:5000/api/states/create/
 
         Args:
             args (list): argument list
@@ -36,19 +35,19 @@ class StateController:
         """
         file_name = args[1]
 
-        data = {'file_name': file_name}
+        data = {"file": f"{file_name}"}
         headers = {'content-type': 'application/json'}
-        url += self.__base_api + 'create/'
-        request = requests.post(url, data=data, headers=headers)
+        url = self.__base_api + 'create/'
+        request = requests.post(url, json=data, headers=headers)
 
         if request.status_code == 201:
-            d = request.json()
-            print('created', d.get('name'))
+            jres = request.json()
+            print(f"created new state [project_name: {jres.get('project_name')}, id: {jres.get('id')}]")
         else:
-            exit('not created')
+            print(request.text)
         
 
-    def load(self, args):
+    def activate(self, args):
         """
         sends a request to the /states/load endpoint to load up an environment
 
@@ -66,11 +65,11 @@ class StateController:
 
         data = {'state_id': state_id}
         headers = {'content-type': 'application/json'}
-        url = self.__base_api + 'load/'
+        url = self.__base_api + 'activate/'
         request = requests.post(url, data=data, headers=headers)
 
         if request.status_code == 200:
-            print('loaded', state_id)
+            print('activated', state_id)
 
 
     def stop(self, args):
