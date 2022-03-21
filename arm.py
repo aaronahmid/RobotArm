@@ -7,10 +7,11 @@ import sys
 
 # maps keys to controller method
 STATE_CONTROLLERS = {
+    'list': 'controllers.StateController().list', 
     'create': 'controllers.StateController().create',
     'load': 'controllers.StateController().load',
     'stop': 'controllers.StateController().stop',
-    'delete': 'controllers.StateController().delete'
+    'delete': 'controllers.StateController().delete',
 }
 
 COMMAND_CONTROLLERS = {
@@ -58,7 +59,7 @@ if __name__ == '__main__':
         pass
     else:
         exit(arm_usage)
-
+    
     # remove option
     del(args[0])
 

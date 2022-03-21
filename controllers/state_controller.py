@@ -42,12 +42,13 @@ class StateController:
 
         if request.status_code == 201:
             jres = request.json()
-            print(f"created new state [project_name: {jres.get('project_name')}, id: {jres.get('id')}]")
+            print(f"created new state [project_name: {jres.get('project_name')}, id: {jres.get('id')}]'",
+            "\nrun 'source scripts/env' load environmental vairables")
         else:
             print(request.text)
         
 
-    def activate(self, args):
+    def load(self, args):
         """
         sends a request to the /states/load endpoint to load up an environment
 
@@ -62,14 +63,17 @@ class StateController:
             success: 'loaded' if status code is 200)
         """
         state_id = args[1]
-
-        data = {'state_id': state_id}
         headers = {'content-type': 'application/json'}
-        url = self.__base_api + 'activate/'
-        request = requests.post(url, data=data, headers=headers)
+        url = self.__base_api + f'{state_id}/activate/'
+        request = requests.put(url, headers=headers)
 
         if request.status_code == 200:
-            print('activated', state_id)
+            if request.text != 'None':
+                print('activated', state_id)
+                print("run 'source scripts/env' to activate and load venv")
+                print("run 'activate' or 'deactivate'")
+            else:
+                print('state does not exist')
 
 
     def stop(self, args):
@@ -121,3 +125,16 @@ class StateController:
 
         if request.status_code == 200:
             print('deleted', state_id)
+
+    def list(self, args):
+        del(args)
+
+        headers = {'content-type': 'application/json'}
+        url = self.__base_api + 'list/'
+        request = requests.get(url, headers=headers)
+
+        if request.status_code == 200:
+            rd = dict(request.json())
+            print(f'{len(rd.keys())} states')
+            print(rd)
+

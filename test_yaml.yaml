@@ -5,13 +5,12 @@ version: v1.0.1
 git_repo: https://github.com/aldabra-ai/aldabra-ai
 git_repo_ssh: git@github.com/aldabra-ai/aldaba-ai
 
-root_dir: /home/krummitz_wx/projects/aldabra-ai
-project_dir: /home/krummitz_wx/projects/aldabra-ai/aldabraai
+working_dir: /home/krummitz_wx/projects/aldabra-ai/aldabraai
 
 framework: django
 
 virtual_venvs: 
-  - aldabra-venv: /home/krummitz_wx/projects/aldabra-ai/aldabra-venv
+  - /home/krummitz_wx/projects/aldabra-ai/aldabra-venv
 
 # Please use a .env or secrets file to store more information
 # like password etc, robotarm would not handle sensitive informations
