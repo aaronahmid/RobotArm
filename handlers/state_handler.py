@@ -2,16 +2,11 @@
 Contains Hadler for handling states related funtions
 """
 import subprocess
-from datetime import date
-from logging import exception
-from tarfile import SUPPORTED_TYPES
-from venv import create
 from states.django_state import DjangoState
 import states
 import yaml
 import os
 from handlers import helpers
-import shlex
 
 
 
