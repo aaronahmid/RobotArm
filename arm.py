@@ -9,17 +9,18 @@ import sys
 STATE_CONTROLLERS = {
     'list': 'controllers.StateController().list', 
     'create': 'controllers.StateController().create',
-    'load': 'controllers.StateController().load',
+    'activate': 'controllers.StateController().activate',
     'stop': 'controllers.StateController().stop',
     'delete': 'controllers.StateController().delete',
 }
 
 COMMAND_CONTROLLERS = {
-    
+    'execute': 'controllers.CommandController().executeCommand',
+    'list': 'controllers.CommandController().listCommands'
 }
 
 TEST_CONTROLLERS = {
-
+    'runtest': 'cotrollers.TestController().runTests'
 }
 
 API_STATUS_CONTROLLERS = {
@@ -65,16 +66,27 @@ if __name__ == '__main__':
 
     # check if option is version or help
     if args_length == 2:
+        # Prints arm script version or help
         if option in ('-v', '-h'):
             print(options[option])
+            exit()
         else:
             exit(arm_usage)
 
     # builds controller path 
-    # fails if
-    # controller method doesn't exists
+    # fails if controller method doesn't exists
     try:
         ct = options[option]
-        eval(ct[args[0]])(args) # passes all arguments into controller method for now
+
+        if ct is COMMAND_CONTROLLERS:
+            try:
+                eval(ct[args[0]])(args)
+            except KeyError:
+                eval(ct['execute'])(args)
+            exit()
+        if ct is TEST_CONTROLLERS:
+            pass
+        else:
+            eval(ct[args[0]])(args) # passes all arguments into controller method for now
     except KeyError:
         exit('Unknown option command')

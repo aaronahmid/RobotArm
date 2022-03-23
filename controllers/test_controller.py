@@ -9,10 +9,14 @@ import requests
 class TestController:
     """
     communicates with appropiate api service
+
+    actions:
+
     """
 
-    def runTests(self, test_name):
+    def runTests(self, args=None):
         """
         sends a request to the run test api service
         """
-        pass
+        if args:
+            print(args)

@@ -10,7 +10,7 @@ class DjangoState(BaseState):
     """
      A django State
     """
-    entry_command = 'manage.py'
+    entry_command = './manage.py'
     commands = {
         "runserver": ['runserver', 'spinning up development server'],
         'makemigrations': ['makemigrations', 'creating migrations'],
@@ -23,10 +23,7 @@ class DjangoState(BaseState):
         """
         Initializes Django State
         """
+        kwargs.update({
+            'entry_command': self.entry_command,
+            'commands': self.commands})
         super().__init__(*args, **kwargs)
-
-    def perform_migration(self):
-        """
-        would perform makemigration and migrate
-        """
-        pass
