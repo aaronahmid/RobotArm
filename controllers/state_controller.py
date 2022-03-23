@@ -48,7 +48,7 @@ class StateController:
             print(request.text)
         
 
-    def load(self, args):
+    def activate(self, args):
         """
         sends a request to the /states/load endpoint to load up an environment
 

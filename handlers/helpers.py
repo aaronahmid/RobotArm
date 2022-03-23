@@ -11,7 +11,7 @@ def mkVenvUbuntu(vpath):
     
     try:
         try:
-            subprocess.run(['virtualenv', f'{vpath}'])
+            subprocess.Popen(['virtualenv', f'{vpath}'])
             os.mkdir('scripts')
             with open('scripts/env', mode='w', encoding='utf8') as file:
                 text=f"#!/bin/bash\nsource {vpath}/bin/activate\nalias activate='source {vpath}/bin/activate'"

@@ -54,7 +54,7 @@ class StateHandler:
             with open('scripts/env', mode='w', encoding='utf8') as file:
                 text=f"#!/bin/bash\nsource {vpath}/bin/activate\nalias activate='source {vpath}/bin/activate'"
                 file.write(text)
-            subprocess.run(['chmod', 'u+x', 'scripts/activate_venv'])
+            subprocess.Popen(['chmod', 'u+x', 'scripts/env'])
         except FileExistsError:
             pass
         return state
@@ -87,9 +87,9 @@ class StateHandler:
                 state.save()
                 print('---state saved---')
 
-                print('activating state...')
-                state = self.activate(state.id)
-                print(f'{state.project_name} activated')
+                # print('activating state...')
+                # state = self.activate(state.id)
+                #print(f'{state.project_name} activated')
                 
                 print('setting up environment, this may take a few minutes...')
                 self.provisionEnv(state)

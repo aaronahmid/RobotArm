@@ -21,12 +21,11 @@ class CommandController:
         """
         """
         headers = {'content-type': 'application/json'}
-        url = self.__base_api + 'execute/'
-        request = requests.get(url, headers=headers) # should return path to working directory and entry command
+        url = self.__base_api + 'get_entry_command/'
+        res = requests.get(url, headers=headers) # should return path to working directory and entry command
 
-        state_dict = {}
-        if request.status_code == 200:
-            state_dict = dict(request.json())
+        if res.status_code == 200:
+            state_dict = dict(res.json())
 
         working_dir = state_dict['working_dir']
         entry_command = state_dict['entry_command']
@@ -35,7 +34,7 @@ class CommandController:
         #     os.chdir(working_dir)
         args.insert(0, entry_command)
         with open('logfile', 'w+', encoding='utf8') as file:
-            subprocess.run(args=args, stderr=file, cwd=working_dir, start_new_session=False)
+            subprocess.Popen(args=args, stderr=file, cwd=working_dir)
 
     def listCommands(self, args=None):
         """
