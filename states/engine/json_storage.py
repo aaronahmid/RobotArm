@@ -22,7 +22,8 @@ class JsonFileStorage:
 
     # string - path to the JSON file
     home = os.getenv('HOME')
-    __file_path = f"{home}/.arm/states.json"
+    __file_path = f'{home}/.arm/states.json'
+
     # dictionary - empty but will store all states by id
     __states = {
         'current_state': {
