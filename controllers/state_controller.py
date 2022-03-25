@@ -4,9 +4,10 @@ State Controller Module
 from controllers import proxy_url
 import requests
 
+
 class StateController:
     """
-    Performs requests to the states API endpoints
+    Performs the following actions by triggering the right api states service
 
     actions:
         create: accepts a <file_name>, sends a requests to the /states/create endpoint
@@ -15,14 +16,12 @@ class StateController:
         stop: accepts a <state_id>, sends a request to the /statest/stop
     """
 
-
     __base_api = proxy_url + '/states/'
-
 
     def create(self, args):
         """
-        sends a request to the /states/create endpoint to create a new
-        development environment state
+        performs a create action by triggering the /states/create endpoint
+        to create a new development environment state
 
         Example:
         curl -H "Content-Type" -X POST -d '{"file_name": "armfile"}' http://127.0.0:5000/api/states/create/
@@ -43,14 +42,14 @@ class StateController:
         if request.status_code == 201:
             jres = request.json()
             print(f"created new state [project_name: {jres.get('project_name')}, id: {jres.get('id')}]'",
-            "\nrun 'source scripts/env' load environmental vairables")
+                  "\nrun 'source scripts/env' load environmental vairables")
         else:
             print(request.text)
-        
 
     def activate(self, args):
         """
-        sends a request to the /states/load endpoint to load up an environment
+        performs the activate action by triggering the /states/activate endpoint
+        to avtivate up an environment
 
         Example:
         curl -H "Content-Type" -X POST -d '{"state_id": "b24f3x"}' \
@@ -75,10 +74,9 @@ class StateController:
             else:
                 print('state does not exist')
 
-
     def stop(self, args):
         """
-        sends a request to the /states/stop endpoint to stop environment specified
+        performs a stop action by triggering the /states/stop endpoint to stop environment specified
 
         Example:
         curl -H "Content-Type" -X POST -d '{"state_id": "b24f3x"}' \
@@ -100,11 +98,10 @@ class StateController:
 
         if request.status_code == 200:
             print('stopped', state_id)
-        
 
     def delete(self, args):
         """
-        sends a request to the /states/delete endpoint to delete environment specified
+        performs a delete action by triggering the /states/delete endpoint to delete environment specified
 
         Example:
         curl -H "Content-Type" -X POST -d '{"state_id": "b24f3x"}' \
@@ -127,6 +124,9 @@ class StateController:
             print('deleted', state_id)
 
     def list(self, args):
+        """
+        performs a list action by triggering the states/list/
+        """
         del(args)
 
         headers = {'content-type': 'application/json'}
@@ -137,4 +137,3 @@ class StateController:
             rd = dict(request.json())
             print(f'{len(rd.keys())} states')
             print(rd)
-

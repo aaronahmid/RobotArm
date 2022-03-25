@@ -3,18 +3,19 @@
 Contains the FileStorage class
 """
 
-from encodings import utf_8
 import json
 import states
 import os
 from states.base_state import BaseState
 from states.django_state import DjangoState
 
+# TODO: create a FlaskState
+
 classes = {
     "DjangoState": DjangoState,
     "BaseStatel": BaseState,
-    #"FlaskState": FlaskState
-    }
+    # "FlaskState": FlaskState
+}
 
 
 class JsonFileStorage:
@@ -29,7 +30,7 @@ class JsonFileStorage:
         'current_state': {
             'id': None,
             'name': None
-            }
+        }
     }
 
     def setCurrentState(self, id):
@@ -38,7 +39,7 @@ class JsonFileStorage:
 
         Args:
             id [uuid]: unique identifier of states object
-        
+
         Returns:
             None if state does not exists
         """
@@ -50,15 +51,15 @@ class JsonFileStorage:
             current_state = {
                 'id': state.id,
                 'name': state.project_name
-                }
+            }
             self.__states['current_state'] = current_state
             return state
 
     def removeCurrentState(self):
         current_state = {
-                'id': None,
-                'name': None
-                }
+            'id': None,
+            'name': None
+        }
         self.__states['current_state'] = current_state
 
     def all(self, cls=None):
@@ -101,7 +102,8 @@ class JsonFileStorage:
                 jo = json.load(f)
                 for key in jo:
                     if key != 'current_state':
-                        self.__states[key] = classes[jo[key]['__class__']](**jo[key])
+                        self.__states[key] = classes[jo[key]
+                                                     ['__class__']](**jo[key])
                     else:
                         self.__states[key] = jo[key]
 

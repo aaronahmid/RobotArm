@@ -1,5 +1,5 @@
 """
-Contains Hadler for handling states related funtions
+Contains Handler for handling states related funtions
 """
 import subprocess
 from states.django_state import DjangoState
@@ -8,11 +8,21 @@ import yaml
 import os
 from handlers import helpers
 
+# TODO: make a database handler
 
 
 class StateHandler:
     """
-    handles state related funtions
+    handles state related funtions, utilized by state apis
+
+    methods:
+        getCurrentSate:
+        activate:
+        deactivate:
+        createState:
+        deleteState
+        all_states:
+        provisionEnv:
     """
     SUPPORTED_FRAMEWORKS = {
         'django': 'states.django_state.DjangoState'
@@ -37,14 +47,14 @@ class StateHandler:
 
          Args:
             id [uuid]: unique identifier of states object
-        
+
         Returns:
             None if setCurrentState returns None
         """
         state = states.storage.setCurrentState(id)
         states.storage.save()
 
-        wd = state.working_dir       
+        wd = state.working_dir
         if os.path.isdir(wd) and os.getcwd() != wd:
             os.chdir(wd)
 
@@ -52,7 +62,7 @@ class StateHandler:
         try:
             os.mkdir('scripts')
             with open('scripts/env', mode='w', encoding='utf8') as file:
-                text=f"#!/bin/bash\nsource {vpath}/bin/activate\nalias activate='source {vpath}/bin/activate'"
+                text = f"#!/bin/bash\nsource {vpath}/bin/activate\nalias activate='source {vpath}/bin/activate'"
                 file.write(text)
             subprocess.Popen(['chmod', 'u+x', 'scripts/env'])
         except FileExistsError:
@@ -72,9 +82,9 @@ class StateHandler:
 
          Args:
             file_name [string]: name of or path to file
-        
+
         Returns:
-            
+
         """
         file_name = kwargs['file']
         yaml_dict = self.parseYamlFile(file_name)
@@ -90,7 +100,7 @@ class StateHandler:
                 # print('activating state...')
                 # state = self.activate(state.id)
                 #print(f'{state.project_name} activated')
-                
+
                 print('setting up environment, this may take a few minutes...')
                 self.provisionEnv(state)
                 print('done.')
@@ -104,7 +114,7 @@ class StateHandler:
 
          Args:
             id [uuid]: unique identifier of states object
-        
+
         Returns:
             None if state does not exists
         """
@@ -112,7 +122,7 @@ class StateHandler:
             states.storage.delete(id)
         except Exception:
             return None
-            
+
     @staticmethod
     def parseYamlFile(file):
         """
@@ -126,19 +136,19 @@ class StateHandler:
                 return yaml_dict
         except FileNotFoundError:
             print("file not found")
-    
+
     @staticmethod
     def all_states():
         """
         retrieves all states objects
         """
         return states.storage.all()
-    
+
     def provisionEnv(self, state):
         """
         provision an dev environment
         """
-        wd = state.working_dir       
+        wd = state.working_dir
         if os.path.isdir(wd) and os.getcwd() != wd:
             os.chdir(wd)
 
@@ -149,10 +159,10 @@ class StateHandler:
             vpath = venvs[0]
             print(vpath)
             created = helpers.mkVenvUbuntu(vpath)
-        
+
             if created:
                 print(f'created virtual environment at {vpath}')
-            
+
         # if state.database:
         #     for database in state.database:
         #         try:
@@ -160,4 +170,3 @@ class StateHandler:
         #             eval(self.SUPPORTED_DATABASE[database['type']])(database['name'], database['user'])
         #         except Exception as e:
         #             raise(e)
-            

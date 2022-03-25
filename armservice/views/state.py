@@ -11,6 +11,10 @@ from flask import (
 )
 from armservice.views import api_views
 
+# TODO: deactivate state api
+# TODO: delete state api
+# TODO: list states api
+
 @api_views.route('/states', methods=['GET'], strict_slashes=False)
 def states():
     """
@@ -37,14 +41,15 @@ def create_state():
         state = StateHandler().createState(**kwargs)
     except TypeError as e:
         raise(e)
-        #return "Not a JSON", 400
-    
+        # return "Not a JSON", 400
+
     return make_response(jsonify(state.to_dict()), 201)
+
 
 @api_views.route('/states/<state_id>/activate/', methods=['PUT'], strict_slashes=False)
 def activate_state(state_id):
     if state_id is None:
         return "Missing state_id", 400
-    
+
     state = StateHandler().activate(state_id)
     return make_response(str(state), 200)

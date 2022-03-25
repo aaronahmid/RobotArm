@@ -14,7 +14,7 @@ class DjangoState(BaseState):
     commands = {
         "runserver": ['runserver', 'spinning up development server'],
         'makemigrations': ['makemigrations', 'creating migrations'],
-        'migrate': ['migrate', 'migrating your data',],
+        'migrate': ['migrate', 'migrating your data', ],
         'shell': ['shell', 'starting shell'],
         'make_superuser': ['createsuperuser', 'creating a super user'],
     }

@@ -13,6 +13,7 @@ class BaseState:
     BaseState for future class definitions
     """
     __current_state = ''
+
     def __init__(self, *args, **kwargs):
         """
         Initializes base model with an id
@@ -23,7 +24,7 @@ class BaseState:
                     setattr(self, key, value)
                 if kwargs.get("id", None) is None:
                     uid = str(uuid.uuid4())
-                    self.id = uid[:6] 
+                    self.id = uid[:6]
         else:
             self.id = str(uuid.uuid4())
 

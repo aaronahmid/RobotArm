@@ -9,7 +9,7 @@ from handlers import StateHandler
 
 class CommandHandler:
     """
-    communicates with api and returns required state
+    are utilized by the api and returns required state
     information on how to handle commands 
     """
 
@@ -23,7 +23,7 @@ class CommandHandler:
 
         response_dict = {
             'working_dir': current_state.working_dir,
-            'entry_command': current_state.entry_command   
+            'entry_command': current_state.entry_command
         }
         return response_dict
 

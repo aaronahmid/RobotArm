@@ -8,7 +8,7 @@ from flask import (
     request,
     jsonify
 )
-from handlers import CommandHandler 
+from handlers import CommandHandler
 
 
 @api_views.route('/commnds', methods=['GET'], strict_slashes=False)
@@ -19,6 +19,7 @@ def list_commands():
     response = CommandHandler().getAllCommands()
 
     return make_response(jsonify(response), 2)
+
 
 @api_views.route('/commands/get_entry_command', methods=['GET'], strict_slashes=False)
 def get_entry_command():
