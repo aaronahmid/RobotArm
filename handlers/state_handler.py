@@ -153,12 +153,11 @@ class StateHandler:
             if created:
                 print(f'created virtual environment at {vpath}')
             
-        if state.database:
-            for database in state.database:
-                try:
-                    print(database)
-                    eval(self.SUPPORTED_DATABASE[database['type']])(database['name'], database['user'])
-                except Exception as e:
-                    print(e)
-
+        # if state.database:
+        #     for database in state.database:
+        #         try:
+        #             print(database)
+        #             eval(self.SUPPORTED_DATABASE[database['type']])(database['name'], database['user'])
+        #         except Exception as e:
+        #             raise(e)
             

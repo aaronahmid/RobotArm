@@ -130,3 +130,5 @@ dmypy.json
 .pyre/
 
 processes.txt
+states.json
+test_yaml.test_yaml

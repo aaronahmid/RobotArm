@@ -1,5 +1,9 @@
 import os
+from re import sub
 import subprocess
+import pathlib
+
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 def mkVenvUbuntu(vpath):
     """
@@ -26,8 +30,23 @@ def mkVenvUbuntu(vpath):
 
     return True
 
-def postgresCreate(db_name, db_user):
+def installPostgres():
+    """
+    installs a postgresql database server
+    """
+    with open(f'{BASE_DIR}/logfile', mode='w', encoding='utf8') as file:
+        subprocess.run(['./install_postgresql_server'], stdout=file, cwd=f'{BASE_DIR}/scripts')
+
+def postgresCreate(db_name, db_user, db_host='localhost', db_port='5432'):
     """
     creates a postgresql database
     """
+    installPostgres()
     print('creating postgresql database...')
+    with open('{BASE_DIR}/logfile', mode='w', encoding='utf8') as file:
+        subprocess.run([
+            'createdb', 
+            f'-h {db_host}', 
+            f'-p {db_port}',
+            f'-U {db_user}',
+            f'{db_name}'], stderr=file)

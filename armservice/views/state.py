@@ -35,8 +35,9 @@ def create_state():
             return 'Missing file', 400
     try:
         state = StateHandler().createState(**kwargs)
-    except TypeError:
-        return "Not a JSON", 400
+    except TypeError as e:
+        raise(e)
+        #return "Not a JSON", 400
     
     return make_response(jsonify(state.to_dict()), 201)
 
