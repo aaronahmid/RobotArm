@@ -12,6 +12,7 @@ def mkVenvLinux(vpath):
     """
     Creates a python virtual environment on linux
     """
+    print(vpath)
     if os.path.isdir(vpath):
         print('virtual env exists, activate it instead')
         return False

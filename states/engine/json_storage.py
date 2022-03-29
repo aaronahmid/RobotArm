@@ -16,14 +16,14 @@ classes = {
     "BaseStatel": BaseState,
     # "FlaskState": FlaskState
 }
-
+HOME = os.getenv('HOME')
 
 class JsonFileStorage:
     """serializes instances to a JSON file & deserializes back to instances"""
 
     # string - path to the JSON file
-    home = os.getenv('HOME')
-    __file_path = f'{home}/.arm/states.json'
+    
+    __file_path = f'{HOME}/.arm/states.json'
 
     # dictionary - empty but will store all states by id
     __states = {
@@ -95,7 +95,11 @@ class JsonFileStorage:
         if os.path.isfile(self.__file_path):
             pass
         else:
-            with open(self.__file_path, 'x', encoding='utf8') as f:
+            try:
+                os.mkdir(f'{HOME}/.arm')
+            except FileExistsError:
+                pass
+            with open(f'{self.__file_path}', mode='x', encoding='utf8') as f:
                 f.close()
         if os.stat(self.__file_path).st_size > 1:
             with open(self.__file_path, mode='r', encoding='utf8') as f:
