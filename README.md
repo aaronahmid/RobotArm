@@ -5,13 +5,19 @@ RobotArm is micro automation tool that enables easy creation and management of d
 ## Features
 - Easily create development evironment from a yaml file as states
 - run management commands easily from any directory in your terminal
-- run tests easily from directory in your terminal
+- run tests easily from any directory in your terminal
 - manage your virtual environments without breaking a sweat
 
 ## Future Features
 - create ci/cd cycles from yaml files
 - use multiple environments
 - provision development databases easily
+
+## How to use
+> the current versions only runs on ubuntu-20.04
+> - download latest release
+> - add the following line to your .bashrc file
+> `` alias arm=PATH_TO_ROBOT_ARM_DIR/arm ``
 
 ## Basics
 create a state
