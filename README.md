@@ -18,6 +18,8 @@ RobotArm is micro automation tool that enables easy creation and management of d
 > - download latest release
 > - add the following line to your .bashrc file
 > `` alias arm=PATH_TO_ROBOT_ARM_DIR/arm ``
+> - install requirements.txt file
+> `` pip3 install -r requirements.txt ``
 
 ## Basics
 create a state
