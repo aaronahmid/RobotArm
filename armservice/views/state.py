@@ -1,6 +1,7 @@
 """
 States API modules
 """
+from crypt import methods
 import states
 import json
 from handlers.state_handler import StateHandler
@@ -48,8 +49,33 @@ def create_state():
 
 @api_views.route('/states/<state_id>/activate/', methods=['PUT'], strict_slashes=False)
 def activate_state(state_id):
+    """
+    activates a state
+    """
     if state_id is None:
         return "Missing state_id", 400
 
     state = StateHandler().activate(state_id)
     return make_response(str(state), 200)
+
+
+@api_views.route('/states/get_working_dir/', methods=['GET'], strict_slashes=False)
+def working_dir():
+    """
+    returns test folder
+    """
+    state = StateHandler().getCurrentState()
+    return make_response(jsonify({
+        'working_dir': state.working_dir
+    }), 200)
+
+
+@api_views.route('/states/get_test_folder/', methods=['GET'], strict_slashes=False)
+def get_test_folder():
+    """
+    returns test folder
+    """
+    state = StateHandler().getCurrentState()
+    return make_response(jsonify({
+        'test_folder': state.test_dir
+    }), 200)

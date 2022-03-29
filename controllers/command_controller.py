@@ -6,6 +6,7 @@ import requests
 import subprocess
 import os
 
+# TODO: create methods to run scritps added in yaml file
 
 class CommandController:
     """

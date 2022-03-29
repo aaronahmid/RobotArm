@@ -42,7 +42,7 @@ class StateController:
         if request.status_code == 201:
             jres = request.json()
             print(f"created new state [project_name: {jres.get('project_name')}, id: {jres.get('id')}]'",
-                  "\nrun 'source scripts/env' load environmental vairables")
+                  f"\nrun 'arm -s activate {jres.get('id')}' and 'source scripts/env' load environmental vairables")
         else:
             print(request.text)
 

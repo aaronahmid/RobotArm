@@ -9,6 +9,7 @@ import os
 from handlers import helpers
 
 # TODO: make a database handler
+# TODO: implement git init repo method
 
 
 class StateHandler:
@@ -95,7 +96,10 @@ class StateHandler:
             if framework in self.SUPPORTED_FRAMEWORKS.keys():
                 state = eval(self.SUPPORTED_FRAMEWORKS[framework])(**yaml_dict)
                 state.save()
-                print('---state saved---')
+                subprocess.Popen(
+                    ['echo', '---state saved---'],
+                    encoding='utf8',
+                    cwd=state.working_dir)
 
                 # print('activating state...')
                 # state = self.activate(state.id)
@@ -146,7 +150,10 @@ class StateHandler:
 
     def provisionEnv(self, state):
         """
-        provision an dev environment
+        provision a development environment based on state object
+
+        Args:
+            state [__class__]: a __class__.BaseState object
         """
         wd = state.working_dir
         if os.path.isdir(wd) and os.getcwd() != wd:
@@ -158,7 +165,7 @@ class StateHandler:
             print(venvs)
             vpath = venvs[0]
             print(vpath)
-            created = helpers.mkVenvUbuntu(vpath)
+            created = helpers.mkVenvLinux(vpath)
 
             if created:
                 print(f'created virtual environment at {vpath}')
