@@ -1,7 +1,7 @@
 """
 command controller module
 """
-from controllers import proxy_url
+from robotarm.controllers import proxy_url
 import requests
 import subprocess
 import os

@@ -1,12 +1,12 @@
 """
 Contains Handler for handling states related funtions
 """
-import subprocess
-from states.django_state import DjangoState
-import states
-import yaml
+from robotarm.states.django_state import DjangoState
+from robotarm.handlers import helpers
 import os
-from handlers import helpers
+from robotarm import states
+import subprocess
+import yaml
 
 # TODO: make a database handler
 # TODO: implement git init repo method
@@ -170,10 +170,10 @@ class StateHandler:
             if created:
                 print(f'created virtual environment at {vpath}')
 
-        # if state.database:
-        #     for database in state.database:
-        #         try:
-        #             print(database)
-        #             eval(self.SUPPORTED_DATABASE[database['type']])(database['name'], database['user'])
-        #         except Exception as e:
-        #             raise(e)
+        if state.database:
+            database = state.database[0]
+            try:
+                print(database)
+                eval(self.SUPPORTED_DATABASE[database['type']])(database['name'], database['user'])
+            except Exception as e:
+                raise(e)

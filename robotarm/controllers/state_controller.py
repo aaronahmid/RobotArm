@@ -1,7 +1,7 @@
 """
 State Controller Module
 """
-from controllers import proxy_url
+from robotarm.controllers import proxy_url
 import requests
 
 

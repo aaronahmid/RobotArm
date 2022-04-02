@@ -2,12 +2,12 @@
 """
 Contains the FileStorage class
 """
-
+from robotarm.states.base_state import BaseState
+from robotarm.states.django_state import DjangoState
 import json
-import states
 import os
-from states.base_state import BaseState
-from states.django_state import DjangoState
+import states
+
 
 # TODO: create a FlaskState
 

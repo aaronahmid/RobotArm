@@ -2,8 +2,12 @@
 """
 RobotArm entry script v0.01
 """
-import controllers
+from robotarm import controllers
+import os
+import pathlib
 import sys
+
+#BASE_DIR = pathlib.Path(__file__).resolve().parent
 
 # maps keys to controller method
 STATE_CONTROLLERS = {
@@ -20,14 +24,14 @@ COMMAND_CONTROLLERS = {
 }
 
 TEST_CONTROLLERS = {
-    'run': 'controllers.TestController().run'
+    'run': 'cotrollers.TestController().run'
 }
 
 API_STATUS_CONTROLLERS = {
     'health': 'controllers.APIStatusController().health_check',
 }
 
-if __name__ == '__main__':
+def main():
     # maps keys to controller classes
     options = {
         '-v': 'v0.01',
@@ -91,3 +95,6 @@ if __name__ == '__main__':
             eval(ct[args[0]])(args)
     except KeyError:
         exit('Unknown option command')
+
+if __name__ == '__main__':
+    main()

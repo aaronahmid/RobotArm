@@ -1,6 +1,0 @@
-#!/bin/bash
-# Installs postgresql database server
-# and starts the server 
-sudo apt-get update
-sudo apt-get install -y postgresql postgresql-contrib
-sudo service postgresql start

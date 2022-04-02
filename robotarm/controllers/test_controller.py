@@ -2,7 +2,7 @@
 Test Controller module
 """
 import subprocess
-from controllers import proxy_url
+from robotarm.controllers import proxy_url
 import requests
 import shlex
 

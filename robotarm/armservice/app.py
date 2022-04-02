@@ -3,13 +3,13 @@
 RobotArm API service config file
 """
 import pathlib
-from armservice.views import api_views
+from robotarm.armservice.views import api_views
 from flask import (
     Flask,
     make_response,
     jsonify
 )
-from armservice import getenv
+from robotarm.armservice import getenv
 
 
 # initialize flask app 

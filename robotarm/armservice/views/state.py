@@ -2,15 +2,15 @@
 States API modules
 """
 from crypt import methods
-import states
+from robotarm.states import states
 import json
-from handlers.state_handler import StateHandler
+from robotarm.handlers.state_handler import StateHandler
 from flask import (
     jsonify,
     make_response,
     request
 )
-from armservice.views import api_views
+from robotarm.armservice.views import api_views
 
 # TODO: deactivate state api
 # TODO: delete state api

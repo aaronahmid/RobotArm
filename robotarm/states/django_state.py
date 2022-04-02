@@ -3,7 +3,7 @@
 contains Django State
 """
 from click import command
-from states.base_state import BaseState
+from robotarm.states.base_state import BaseState
 
 
 class DjangoState(BaseState):

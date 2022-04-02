@@ -1,5 +1,6 @@
-import os
-from re import sub
+"""
+A helper module
+"""
 import subprocess
 import pathlib
 
@@ -43,7 +44,7 @@ def installPostgres():
     """
     with open(f'{BASE_DIR}/logfile', mode='w', encoding='utf8') as file:
         subprocess.run(['./install_postgresql_server'],
-                       stdout=file, cwd=f'{BASE_DIR}/scripts')
+                       stderr=file, cwd=f'{BASE_DIR}/scripts')
 
 
 def postgresCreate(db_name, db_user, db_host='localhost', db_port='5432'):
