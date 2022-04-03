@@ -26,7 +26,7 @@ class TestCommandApis(unittest.TestCase):
                     'gunicorn',
                     '-b',
                     '0.0.0.0:5555',
-                    'armservice.app:app'], stdout=file, stderr=file,
+                    'armservice.app:app'], stderr=file,
                     cwd=BASE_DIR)
         except Exception as e:
             raise(e)

@@ -1,8 +1,9 @@
+#!/usr/bin/python3
 """
 Test Controller module
 """
 import subprocess
-from robotarm.controllers import proxy_url
+from  controllers import proxy_url
 import requests
 import shlex
 

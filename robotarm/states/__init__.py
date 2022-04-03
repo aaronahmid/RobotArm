@@ -2,6 +2,6 @@
 """
 initialize the models package
 """
-from robotarm.states.engine.json_storage import JsonFileStorage
+from states.engine.json_storage import JsonFileStorage
 storage = JsonFileStorage()
 storage.reload()

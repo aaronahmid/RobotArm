@@ -1,10 +1,11 @@
+#!/usr/bin/python3
 """
 Contains Handler for handling states related funtions
 """
-from robotarm.states.django_state import DjangoState
-from robotarm.handlers import helpers
+from states.django_state import DjangoState
+from handlers import helpers
 import os
-from robotarm import states
+import states
 import subprocess
 import yaml
 
@@ -96,10 +97,7 @@ class StateHandler:
             if framework in self.SUPPORTED_FRAMEWORKS.keys():
                 state = eval(self.SUPPORTED_FRAMEWORKS[framework])(**yaml_dict)
                 state.save()
-                subprocess.Popen(
-                    ['echo', '---state saved---'],
-                    encoding='utf8',
-                    cwd=state.working_dir)
+                print('---state saved---')
 
                 # print('activating state...')
                 # state = self.activate(state.id)
@@ -159,21 +157,21 @@ class StateHandler:
         if os.path.isdir(wd) and os.getcwd() != wd:
             os.chdir(wd)
 
-        print(os.getcwd())
+        #print(os.getcwd())
         if state.virtual_venvs:
             venvs = state.virtual_venvs
-            print(venvs)
+            #print(venvs)
             vpath = venvs[0]
-            print(vpath)
+            #print(vpath)
             created = helpers.mkVenvLinux(vpath)
 
             if created:
                 print(f'created virtual environment at {vpath}')
 
-        if state.database:
-            database = state.database[0]
-            try:
-                print(database)
-                eval(self.SUPPORTED_DATABASE[database['type']])(database['name'], database['user'])
-            except Exception as e:
-                raise(e)
+        # if state.database:
+        #     database = state.database[0]
+        #     try:
+        #         print(database)
+        #         eval(self.SUPPORTED_DATABASE[database['type']])(database['name'], database['user'])
+        #     except Exception as e:
+        #         raise(e)

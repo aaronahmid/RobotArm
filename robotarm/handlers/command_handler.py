@@ -1,8 +1,9 @@
+#!/usr/bin/python3
 """
 Command Handler module
 """
-from robotarm import states
-from robotarm.handlers import StateHandler
+import states
+from handlers import StateHandler
 
 
 class CommandHandler:

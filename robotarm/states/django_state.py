@@ -2,8 +2,7 @@
 """
 contains Django State
 """
-from click import command
-from robotarm.states.base_state import BaseState
+from  states.base_state import BaseState
 
 
 class DjangoState(BaseState):

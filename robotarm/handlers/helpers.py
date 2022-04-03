@@ -1,10 +1,12 @@
+#!/usr/bin/python3
 """
 A helper module
 """
+import os
 import subprocess
 import pathlib
 
-BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+#BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 # TODO: implemet a way to install requirements.txt file into the python envionment
 
@@ -13,14 +15,15 @@ def mkVenvLinux(vpath):
     """
     Creates a python virtual environment on linux
     """
-    print(vpath)
+    #print(vpath)
     if os.path.isdir(vpath):
         print('virtual env exists, activate it instead')
         return False
 
     try:
         try:
-            subprocess.Popen(['virtualenv', f'{vpath}'])
+            with open('logfile', mode='w', encoding='utf8') as file:
+                subprocess.Popen(['virtualenv', f'{vpath}'], stdout=file, stderr=file)
             os.mkdir('scripts')
             with open('scripts/env', mode='w', encoding='utf8') as file:
                 text = f"#!/bin/bash\nsource {vpath}/bin/activate\nalias activate='source {vpath}/bin/activate'"

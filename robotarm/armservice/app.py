@@ -3,13 +3,13 @@
 RobotArm API service config file
 """
 import pathlib
-from robotarm.armservice.views import api_views
+from armservice.views import api_views
 from flask import (
     Flask,
     make_response,
     jsonify
 )
-from robotarm.armservice import getenv
+from armservice import getenv
 
 
 # initialize flask app 
@@ -39,6 +39,6 @@ def not_found(error):
 
 
 if __name__ == '__main__':
-    host = getenv("HBNB_API_HOST", "0.0.0.0")
-    port = getenv("HBNB_API_PORT", "5000")
+    host = getenv("ARM_API_HOST", "0.0.0.0")
+    port = getenv("ARM_API_PORT", "5555")
     app.run(host=host, port=port)

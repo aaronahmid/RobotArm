@@ -10,6 +10,6 @@ api_views = Blueprint('api_views', __name__, url_prefix='/api')
 # TDOD: 
 
 # api endpoints
-from robotarm.armservice.views.index import *
-from robotarm.armservice.views.state import *
-from robotarm.armservice.views.command import *
+from  armservice.views.index import *
+from  armservice.views.state import *
+from  armservice.views.command import *

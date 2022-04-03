@@ -1,7 +1,6 @@
-E: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)
-E: Unable to lock directory /var/lib/apt/lists/
-W: Problem unlinking the file /var/cache/apt/pkgcache.bin - RemoveCaches (13: Permission denied)
-W: Problem unlinking the file /var/cache/apt/srcpkgcache.bin - RemoveCaches (13: Permission denied)
-E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)
-E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?
-install: cannot change owner and permissions of ‘/var/run/postgresql’: No such file or directory
+[2022-04-03 01:02:18 +0100] [10988] [INFO] Starting gunicorn 20.1.0
+[2022-04-03 01:02:18 +0100] [10988] [INFO] Listening at: http://0.0.0.0:5555 (10988)
+[2022-04-03 01:02:18 +0100] [10988] [INFO] Using worker: sync
+[2022-04-03 01:02:18 +0100] [10990] [INFO] Booting worker with pid: 10990
+[2022-04-03 01:04:23 +0100] [10990] [INFO] Parent changed, shutting down: <Worker 10990>
+[2022-04-03 01:04:23 +0100] [10990] [INFO] Worker exiting (pid: 10990)

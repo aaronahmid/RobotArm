@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+p=`pwd`
+echo "export PATH=\$PATH:$p/robotarm" >> ~/.bashrc

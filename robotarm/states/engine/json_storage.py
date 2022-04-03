@@ -2,8 +2,8 @@
 """
 Contains the FileStorage class
 """
-from robotarm.states.base_state import BaseState
-from robotarm.states.django_state import DjangoState
+from states.base_state import BaseState
+from states.django_state import DjangoState
 import json
 import os
 import states

@@ -1,14 +1,15 @@
+#!/usr/bin/python3
 """
 command handler apis
 """
-from robotarm.armservice.views import api_views
-from robotarm import states
+from  armservice.views import api_views
+import states
 from flask import (
     make_response,
     request,
     jsonify
 )
-from robotarm.handlers import CommandHandler
+from  handlers import CommandHandler
 
 
 @api_views.route('/commnds', methods=['GET'], strict_slashes=False)

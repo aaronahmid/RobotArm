@@ -1,7 +1,8 @@
+#!/usr/bin/python3
 """
 State Controller Module
 """
-from robotarm.controllers import proxy_url
+from controllers import proxy_url
 import requests
 
 
@@ -32,7 +33,10 @@ class StateController:
         Return:
             success: 'created' if status code is 201
         """
-        file_name = args[1]
+        try:
+            file_name = args[1]
+        except IndexError:
+            exit('file name/path not supplied')
 
         data = {"file": f"{file_name}"}
         headers = {'content-type': 'application/json'}
