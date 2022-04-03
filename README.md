@@ -3,6 +3,7 @@
 RobotArm is micro automation tool that enables easy creation and management of development environtments.
 
 ## Features
+- start and stop the arm service easily
 - Easily create development evironment from a yaml file as states
 - run management commands easily from any directory in your terminal
 - run tests easily from any directory in your terminal
@@ -19,6 +20,13 @@ RobotArm is micro automation tool that enables easy creation and management of d
 > and run the ./temp_setup script
 
 ## Basics
+- start arm api service
+> `` arm service start ``
+> confirm apis are running ``arm service status``
+
+- to stop the api service
+> `` arm service stop ``
+
 - create a state
 > ``arm [-s, --state] create full/path/file_name.yaml``
 
@@ -26,10 +34,11 @@ RobotArm is micro automation tool that enables easy creation and management of d
 > ``arm [-s, --state] activate state_id``
 
 - run management commands e.g django
->``arm [-c, --command] runserver [defualts to execute command]``
+>``arm [-c, --command] management_cmd``
     
 -run tests
 >``arm [-t, --tests] run [defaults to test discorvery)``
+
 ------------------------------------------------------------------------------------------------------------------------
 ## Yaml Config File Template
 ![yaml_file_template](https://user-images.githubusercontent.com/41565098/161405937-e4ecefe8-738b-434e-9666-4ab98f40be64.jpg)
