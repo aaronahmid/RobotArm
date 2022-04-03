@@ -9,8 +9,6 @@ import sys
 
 #BASE_DIR = pathlib.Path(__file__).resolve().parent
 
-# maps keys to controller method
-
 # mappings for state controllers
 STATE_CONTROLLERS = {
     'list': 'controllers.StateController().list',
