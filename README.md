@@ -15,7 +15,7 @@ RobotArm is micro automation tool that enables easy creation and management of d
 
 ## How to install
 > the current versions only runs on ubuntu-20.04
-> - download latest release
+> download latest release
 > and run the ./temp_setup script
 
 ## Basics
@@ -31,9 +31,10 @@ RobotArm is micro automation tool that enables easy creation and management of d
 -run tests
 >``arm [-t, --tests] run [defaults to test discorvery)``
 
+>
 > Yaml Config File Template
 ![yaml_file_template](https://user-images.githubusercontent.com/41565098/161405937-e4ecefe8-738b-434e-9666-4ab98f40be64.jpg)
-
+>
 
 > ### Arm currently only supports only the django web framwork, when using with a framwork...
 
