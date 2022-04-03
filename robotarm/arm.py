@@ -39,8 +39,11 @@ API_SERVICE_CONTROLLERS = {
 }
 
 
-# this 
 def main():
+    """
+    parses command line arguments
+    and maps keyword options to controllers
+    """
     # maps keyword options to controller mappings
     options = {
         ('-v', '--version'): 'v0.01',
@@ -83,7 +86,7 @@ def main():
         else:
             exit(arm_usage)
 
-    # builds controller method call
+    # builds controller method calls
     # fails if controller keyword option
     # or controller method doesn't exists
     try:
@@ -106,5 +109,7 @@ def main():
     except KeyError:
         exit('Unknown keyword option action')
 
+# runs the main funtion
+# when script is invoked
 if __name__ == '__main__':
     main()
