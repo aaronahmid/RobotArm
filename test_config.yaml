@@ -1,0 +1,27 @@
+---
+project_name: newproj
+version: v1.0.1
+
+git_repo: https://github.com/AmidBidee/newproj
+git_repo_ssh: git@github.com/AmidBidee/newproj
+
+working_dir: /home/krummitz_wx/projects/new_proj
+
+framework: django
+
+virtual_venvs:
+  - /home/krummitz_wx/projects/new_proj/newproj-venv
+
+# Please use a .env or secrets file to store more information
+# like password etc, robotarm would not handle sensitive informations
+database:
+  - name: aldabradb-dev-local
+    type: postgresql
+    version: '*'
+    user: krummitz_wx
+
+
+tests:
+  - tool: unittest
+    discovery_dir: /home/krummitz_wx/projects/new_proj
+    test_dir: /home/krummitz_wx/projects/new_proj/tests
