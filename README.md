@@ -19,18 +19,22 @@ RobotArm is micro automation tool that enables easy creation and management of d
 > and run the ./temp_setup script
 
 ## Basics
-create a state
--``arm [-s, --state] create full/path/file_name.yaml``
+- create a state
+> ``arm [-s, --state] create full/path/file_name.yaml``
 
-activate state
- -``arm [-s, --state] activate state_id``
+- activate state
+> ``arm [-s, --state] activate state_id``
 
-run management commands e.g django
--``arm [-c, --command] runserver [defualts to execute command]``
+- run management commands e.g django
+>``arm [-c, --command] runserver [defualts to execute command]``
     
-run tests
-- ``arm [-t, --tests] run [defaults to test discorvery)``
-    
+-run tests
+>``arm [-t, --tests] run [defaults to test discorvery)``
+
+> Yaml Config File Template
+![yaml_file_template](https://user-images.githubusercontent.com/41565098/161405937-e4ecefe8-738b-434e-9666-4ab98f40be64.jpg)
+
+
 > ### Arm currently only supports only the django web framwork, when using with a framwork...
 
 > this tool is not ready for use, it's not completed and there are several bugs, installation method not concluded yet, to use start the api service, add the dir to path or create an alias to the arm script. user with care.
