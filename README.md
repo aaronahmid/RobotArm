@@ -30,13 +30,14 @@ RobotArm is micro automation tool that enables easy creation and management of d
     
 -run tests
 >``arm [-t, --tests] run [defaults to test discorvery)``
-
+------------------------------------------------------------------------------------------------------------------------
 >
 > Yaml Config File Template
 ![yaml_file_template](https://user-images.githubusercontent.com/41565098/161405937-e4ecefe8-738b-434e-9666-4ab98f40be64.jpg)
 >
+--------------------------------------------------------------------------------------------------------------------------
 
-> ### Arm currently only supports only the django web framwork, when using with a framwork...
+### Arm currently only supports only the django web framwork, when using with a framwork...
 
 > this tool is not ready for use, it's not completed and there are several bugs, installation method not concluded yet, to use start the api service, add the dir to path or create an alias to the arm script. user with care.
 
