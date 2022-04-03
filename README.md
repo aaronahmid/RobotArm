@@ -13,26 +13,23 @@ RobotArm is micro automation tool that enables easy creation and management of d
 - use multiple environments
 - provision development databases easily
 
-## How to use
+## How to install
 > the current versions only runs on ubuntu-20.04
 > - download latest release
-> - add the following line to your .bashrc file
-> `` alias arm=PATH_TO_ROBOT_ARM_DIR/arm ``
-> - install requirements.txt file
-> `` pip3 install -r requirements.txt ``
+> and run the ./temp_setup script
 
 ## Basics
 create a state
-    ``arm -s create full/path/file_name.yaml``
+-``arm [-s, --state] create full/path/file_name.yaml``
 
 activate state
-    ``arm -s activate state_id``
+ -``arm [-s, --state] activate state_id``
 
 run management commands e.g django
-    ``arm -c runserver [defualts to execute command]``
+-``arm [-c, --command] runserver [defualts to execute command]``
     
 run tests
-    ``arm -t run [defaults to test discorvery)``
+- ``arm [-t, --tests] run [defaults to test discorvery)``
     
 > ### Arm currently only supports only the django web framwork, when using with a framwork...
 
