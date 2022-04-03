@@ -10,6 +10,8 @@ import sys
 #BASE_DIR = pathlib.Path(__file__).resolve().parent
 
 # maps keys to controller method
+
+# mappings for state controllers
 STATE_CONTROLLERS = {
     'list': 'controllers.StateController().list',
     'create': 'controllers.StateController().create',
@@ -18,23 +20,28 @@ STATE_CONTROLLERS = {
     'delete': 'controllers.StateController().delete',
 }
 
+# mappings for command controllers
 COMMAND_CONTROLLERS = {
     'execute': 'controllers.CommandController().executeCommand',
     'list': 'controllers.CommandController().listCommands'
 }
 
+# mappings for test controllers
 TEST_CONTROLLERS = {
     'run': 'cotrollers.TestController().run'
 }
 
+# mappings for api service controller
 API_SERVICE_CONTROLLERS = {
     'status': 'controllers.APIServiceController().health_check',
     'start': 'controllers.APIServiceController().start_service',
     'stop': 'controllers.APIServiceController().stop_service'
 }
 
+
+# this 
 def main():
-    # maps keys to controller classes
+    # maps keyword options to controller mappings
     options = {
         ('-v', '--version'): 'v0.01',
         ('-h', '--help'): 'help',
@@ -45,11 +52,11 @@ def main():
         'service': API_SERVICE_CONTROLLERS,
     }
 
-    # extract file name and remove it
+    # extract arguments and length
     args = sys.argv
     args_length = len(args)  # store args length
 
-    arm_usage = 'Usage'
+    arm_usage = "error: garbage keyword option\narm [-option, --option] [action]\ntry arm [-h, --help]\n For help text"
     file_name = args[0]
 
     # make sure length isn't less than 2
@@ -59,8 +66,7 @@ def main():
     # remove file name
     del(args[0])
 
-    # extract option and check if
-    # option is valid
+    # extract option
     option = args[0]
 
     # remove option
@@ -77,8 +83,9 @@ def main():
         else:
             exit(arm_usage)
 
-    # builds controller path
-    # fails if controller method doesn't exists
+    # builds controller method call
+    # fails if controller keyword option
+    # or controller method doesn't exists
     try:
         for keyword_options in options.keys():
             if option in keyword_options or option is keyword_options:
@@ -93,10 +100,9 @@ def main():
             if keyword_option is API_SERVICE_CONTROLLERS:
                 eval(keyword_option[args[0]])()
             else:
-                # passes all arguments into controller method for now
                 eval(keyword_option[args[0]])(args)
         except UnboundLocalError:
-            exit('Uknown keyword option')
+            exit(arm_usage)
     except KeyError:
         exit('Unknown keyword option action')
 
