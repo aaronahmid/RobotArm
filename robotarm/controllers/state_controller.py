@@ -5,6 +5,8 @@ State Controller Module
 from controllers import proxy_url
 import requests
 
+# TODO: Make an Error Handler That provides Error codes, details and a logfile
+# TODO: Decide on API request pattern
 
 class StateController:
     """
@@ -25,7 +27,7 @@ class StateController:
         to create a new development environment state
 
         Example:
-        curl -H "Content-Type" -X POST -d '{"file_name": "armfile"}' http://127.0.0:5000/api/states/create/
+        curl -H "Content-Type: application/json" -X POST -d '{"file_name": "armfile"}' http://127.0.0:5000/api/states/create/
 
         Args:
             args (list): argument list
@@ -33,22 +35,34 @@ class StateController:
         Return:
             success: 'created' if status code is 201
         """
+        # expects a filename at index[1]
         try:
             file_name = args[1]
         except IndexError:
-            exit('file name/path not supplied')
-
+            exit('error: file name/path not supplied')
+            
+        # builds data json data sent
+        # headers
+        # and url endpoint
         data = {"file": f"{file_name}"}
         headers = {'content-type': 'application/json'}
         url = self.__base_api + 'create/'
+        
+        # sends a post request to the url endpoint
+        # with above data and headers
         request = requests.post(url, json=data, headers=headers)
-
+        
+        # checks status code
+        # collects response data
+        # and prints an output
         if request.status_code == 201:
-            jres = request.json()
-            print(f"created new state [project_name: {jres.get('project_name')}, id: {jres.get('id')}]'",
-                  f"\nrun 'arm -s activate {jres.get('id')}' and 'source scripts/env' load environmental vairables")
+            json_response = request.json()
+            proj_name = json_response.get('project_name')
+            state_id = json_response.get('id')
+            print(f"created new state [project_name: {proj_name}, id: {state_id}]'",
+                  f"\nrun 'arm -s activate {state_id}' and then run 'source scripts/env' load environmental vairables")
         else:
-            print(request.text)
+            print("error: something went wrong")
 
     def activate(self, args):
         """
@@ -56,34 +70,50 @@ class StateController:
         to avtivate up an environment
 
         Example:
-        curl -H "Content-Type" -X POST -d '{"state_id": "b24f3x"}' \
+        curl -H "Content-Type: application/json" -X POST -d '{"state_id": "b24f3x"}' \
             http://127.0.0:5000/api/states/load/
 
         Args:
             args (list): argument list
 
         Return:
-            success: 'loaded' if status code is 200)
+            success: 'activated' if status code is 200)
         """
-        state_id = args[1]
+        # expects an id at index[1]
+        try:
+            state_id = args[1]
+        except IndexError:
+            exit('error: environment "state id" not supplied')
+            
+        # builds data json data sent
+        # headers
+        # and url endpoint
         headers = {'content-type': 'application/json'}
         url = self.__base_api + f'{state_id}/activate/'
+        
+        # sends a put request to the url endpoint 
+        # with the following headers above 
         request = requests.put(url, headers=headers)
-
+        
+        # checks status code
+        # if state exist
+        # prints an output
         if request.status_code == 200:
             if request.text != 'None':
                 print('activated', state_id)
                 print("run 'source scripts/env' to activate and load venv")
-                print("run 'activate' or 'deactivate'")
-            else:
-                print('state does not exist')
+                print("then you can run 'activate' or 'deactivate'")
+        elif request.status_code == 404:
+                print('error: state does not exist')
+        else:
+            print('error: something is not right')
 
     def stop(self, args):
         """
         performs a stop action by triggering the /states/stop endpoint to stop environment specified
 
         Example:
-        curl -H "Content-Type" -X POST -d '{"state_id": "b24f3x"}' \
+        curl -H "Content-Type: application/json" -X POST -d '{"state_id": "b24f3x"}' \
             http://127.0.0:5000/api/states/stop/
 
         Args:
@@ -93,22 +123,37 @@ class StateController:
             success: 'stopped' if status code is 200
 
         """
-        state_id = args[1]
-
-        data = {'state_id': state_id}
+        # expects an id at index[1]
+        try:
+            state_id = args[1]
+        except IndexError:
+            exit('error: environment "state id" not supplied')
+            
+        # builds data json data sent
+        # headers
+        # and url endpoint
         headers = {'content-type': 'application/json'}
-        url = self.__base_api + 'stop/'
-        request = requests.post(url, data=data, headers=headers)
-
+        url = self.__base_api + f'{state_id}/stop/'
+        
+        # sends a put request to the url endpoint 
+        # with the following headers above
+        request = requests.put(url, headers=headers)
+        
+        # checks status code
+        # prints an output
         if request.status_code == 200:
             print('stopped', state_id)
+        elif request.status_code == 404:
+            print('error: state does not exist')
+        else:
+            print('error: something is not right')
 
     def delete(self, args):
         """
         performs a delete action by triggering the /states/delete endpoint to delete environment specified
 
         Example:
-        curl -H "Content-Type" -X POST -d '{"state_id": "b24f3x"}' \
+        curl -H "Content-Type: application/json" -X POST -d '{"state_id": "b24f3x"}' \
             http://127.0.0:5000/api/states/delete/
 
         Args:
@@ -117,22 +162,38 @@ class StateController:
         Return:
             success: 'deleted' if status code is 200
         """
-        state_id = args[1]
-
-        data = {'state_id': state_id}
+        # expects an id at index[1]
+        try:
+            state_id = args[1]
+        except IndexError:
+            exit('error: environment "state id" not supplied')
+            
+        # builds data json data sent
+        # headers
+        # and url endpoint
         headers = {'content-type': 'application/json'}
-        url = self.__base_api + 'deleted/'
-        request = requests.post(url, data=data, headers=headers)
+        url = self.__base_api + f'{state_id}/delete/'
+        
+        # sends a put request to the url endpoint 
+        # with the following headers above
+        request = requests.post(url, headers=headers)
 
+        # checks status code
+        # prints an output
         if request.status_code == 200:
             print('deleted', state_id)
-
+        elif request.status_code == 404:
+            print('error: state does not exist')
+        else:
+            print('error: something is not right')
+            
+    # method not completed
     def list(self, args):
         """
         performs a list action by triggering the states/list/
         """
         del(args)
-
+        
         headers = {'content-type': 'application/json'}
         url = self.__base_api + 'list/'
         request = requests.get(url, headers=headers)
