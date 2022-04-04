@@ -35,22 +35,23 @@ class CommandController:
         url = self.__base_api + 'get_entry_command/'
         # should return path to working directory and entry command
         res = requests.get(url, headers=headers)
-
+        
+        # check status code
         if res.status_code == 200:
             state_dict = dict(res.json())
-
+            
+        # get working dir and entry command
         working_dir = state_dict['working_dir']
         entry_command = state_dict['entry_command']
 
-        # if os.curdir() != working_dir:
-        #     os.chdir(working_dir)
-        args.insert(0, entry_command)
+        args.insert(0, entry_command)   # build the command list
+        # execute command but write any error to a logfile
         with open('logfile', 'w+', encoding='utf8') as file:
             subprocess.Popen(args=args, stderr=file, cwd=working_dir)
 
     # TODO: create listCommands method
-
     def listCommands(self, args=None):
         """
+        lists commands available
         """
         pass
