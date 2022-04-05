@@ -157,12 +157,9 @@ class StateHandler:
         if os.path.isdir(wd) and os.getcwd() != wd:
             os.chdir(wd)
 
-        #print(os.getcwd())
         if state.virtual_venvs:
             venvs = state.virtual_venvs
-            #print(venvs)
             vpath = venvs[0]
-            #print(vpath)
             created = helpers.mkVenvLinux(vpath)
 
             if created:

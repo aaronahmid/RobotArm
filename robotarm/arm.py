@@ -57,7 +57,7 @@ def main():
     args = sys.argv
     args_length = len(args)  # store args length
 
-    arm_usage = "error: garbage keyword option\narm [-option, --option] [action]\ntry arm [-h, --help]\n For help text"
+    arm_usage = "error: garbage keyword option\n\narm [-option, --option] [action]\n\ntry arm [-h, --help]\n For help text"
     file_name = args[0]
 
     # make sure length isn't less than 2
@@ -106,6 +106,7 @@ def main():
             exit(arm_usage)
     except KeyError:
         exit('Unknown keyword option action')
+
 
 # runs the main funtion
 # when script is invoked
