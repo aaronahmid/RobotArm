@@ -12,7 +12,7 @@ from flask import (
 from armservice import getenv
 
 
-# initialize flask app 
+# initialize flask app
 app = Flask(__name__)
 # register/mount blueprint
 app.register_blueprint(api_views)

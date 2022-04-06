@@ -7,7 +7,7 @@ import os
 import pathlib
 import sys
 
-#BASE_DIR = pathlib.Path(__file__).resolve().parent
+# BASE_DIR = pathlib.Path(__file__).resolve().parent
 
 # mappings for state controllers
 STATE_CONTROLLERS = {
@@ -57,7 +57,11 @@ def main():
     args = sys.argv
     args_length = len(args)  # store args length
 
-    arm_usage = "error: garbage keyword option\n\narm [-option, --option] [action]\n\ntry arm [-h, --help]\n For help text"
+    arm_usage = "error: \
+garbage keyword option\n\narm [-option, --option] \
+[action]\n\ntry arm \
+[-h, --help]\n For help text"
+
     file_name = args[0]
 
     # make sure length isn't less than 2

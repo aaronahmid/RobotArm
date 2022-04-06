@@ -17,7 +17,8 @@ RobotArm is micro automation tool that enables easy creation and management of d
 ## How to install
 > the current versions only runs on ubuntu-20.04
 > download latest release
-> and run the ./temp_setup script
+> and run the setup.py script
+> if setup.py does set things up rightly run ./temp_setup script
 
 ## Basics
 - start arm api service
@@ -28,7 +29,9 @@ RobotArm is micro automation tool that enables easy creation and management of d
 > `` arm service stop ``
 
 - create a state
-> ``arm [-s, --state] create full/path/file_name.yaml``
+> ``arm [-s, --state] create full/path/file_name.yaml (tips: `pwd`\file_name.yaml)``
+> please get the state_id before you clear your screen
+> yeah! I know I know, I should make a fancy list state feature (working on IT!!)
 
 - activate state
 > ``arm [-s, --state] activate state_id``
@@ -46,7 +49,9 @@ RobotArm is micro automation tool that enables easy creation and management of d
 
 ### Arm currently only supports only the django web framwork, when using with a framwork...
 
-> this tool is not ready for use, it's not completed and there are several bugs, installation method not concluded yet, to use start the api service, add the dir to path or create an alias to the arm script. user with care.
+> this tool is not ready for use, it's not completed and there are several bugs, installation method not concluded yet, to use start the api service, add the dir to path or create an alias to the arm script or use the recomended temporary setup shell script. user with care.
+
+> Contribute?? Uhhhhhhhhm! Nope Not yet...
 
 > To infinity and beyond
 > -Buzz Lightyear's

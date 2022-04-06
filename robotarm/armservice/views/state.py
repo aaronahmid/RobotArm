@@ -10,11 +10,12 @@ from flask import (
     make_response,
     request
 )
-from  armservice.views import api_views
+from armservice.views import api_views
 
 # TODO: deactivate state api
 # TODO: delete state api
 # TODO: list states api
+
 
 @api_views.route('/states', methods=['GET'], strict_slashes=False)
 def states():
@@ -47,7 +48,8 @@ def create_state():
     return make_response(jsonify(state.to_dict()), 201)
 
 
-@api_views.route('/states/<state_id>/activate/', methods=['PUT'], strict_slashes=False)
+@api_views.route('/states/<state_id>/activate/',
+                 methods=['PUT'], strict_slashes=False)
 def activate_state(state_id):
     """
     activates a state
@@ -59,7 +61,8 @@ def activate_state(state_id):
     return make_response(str(state), 200)
 
 
-@api_views.route('/states/get_working_dir/', methods=['GET'], strict_slashes=False)
+@api_views.route('/states/get_working_dir/',
+                 methods=['GET'], strict_slashes=False)
 def working_dir():
     """
     returns test folder
@@ -70,12 +73,11 @@ def working_dir():
     }), 200)
 
 
-@api_views.route('/states/get_test_folder/', methods=['GET'], strict_slashes=False)
+@api_views.route('/states/get_test_folder/',
+                 methods=['GET'], strict_slashes=False)
 def get_test_folder():
     """
     returns test folder
     """
     state = StateHandler().getCurrentState()
-    return make_response(jsonify({
-        'test_folder': state.test_dir
-    }), 200)
+    return make_response(jsonify({'test_folder': state.test_dir}), 200)
