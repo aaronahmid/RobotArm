@@ -13,6 +13,7 @@ RobotArm is micro automation tool that enables easy creation and management of d
 - create ci/cd cycles from yaml files
 - use multiple environments
 - provision development databases easily
+- setting up local git repo, and using git commands easily from any directory in your terminal
 
 ## How to install
 > the current versions only runs on ubuntu-20.04
@@ -49,7 +50,7 @@ RobotArm is micro automation tool that enables easy creation and management of d
 
 ### Arm currently only supports only the django web framwork, when using with a framwork...
 
-> this tool is not ready for use, it's not completed and there are several bugs, installation method not concluded yet, to use start the api service, add the dir to path or create an alias to the arm script or use the recomended temporary setup shell script. use with care.
+> this tool is not ready for use, it's not completed and there are several bugs, not yet documented properly, installation method not concluded yet, to use start the api service, add the dir to path or create an alias to the arm script or use the recomended temporary setup shell script. Use with care.
 
 > Contribute?? Uhhhhhhhhm! Nope Not yet...
 
