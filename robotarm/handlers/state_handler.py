@@ -2,15 +2,17 @@
 """
 Contains Handler for handling states related funtions
 """
-from states.django_state import DjangoState
-from handlers import helpers
+from flask import current_app
+from robotarm.states.django_state import DjangoState
+from robotarm.handlers import helpers
 import os
-import states
+from robotarm import states
 import subprocess
 import yaml
 
 # TODO: make a database handler
 # TODO: implement git init repo method
+# TODO: improve provision environment, make it more interactive
 
 
 class StateHandler:
@@ -18,13 +20,13 @@ class StateHandler:
     handles state related funtions, utilized by state apis
 
     methods:
-        getCurrentSate:
-        activate:
-        deactivate:
-        createState:
+        getCurrentSate
+        activate
+        deactivate
+        createState
         deleteState
-        all_states:
-        provisionEnv:
+        all_states
+        provisionEnv
     """
     SUPPORTED_FRAMEWORKS = {
         'django': 'states.django_state.DjangoState'
@@ -144,7 +146,15 @@ class StateHandler:
         """
         retrieves all states objects
         """
-        return states.storage.all()
+        states_objs = states.storage.all()
+        state_dict = {}
+
+        for key, value in states_objs.items():
+            if key != 'current_state':
+                state_dict[key] = {'name': value.project_name, 'version': value.version}
+        state_dict['current_state'] = states_objs['current_state']
+        
+        return state_dict
 
     def provisionEnv(self, state):
         """

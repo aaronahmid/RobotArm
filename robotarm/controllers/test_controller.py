@@ -2,10 +2,8 @@
 """
 Test Controller module
 """
-from ast import arg
-from distutils.log import error
 import subprocess
-from  controllers import proxy_url
+from  robotarm.controllers import proxy_url
 import requests
 import shlex
 
@@ -142,7 +140,7 @@ class TestController:
         if module is None:
             raise(TypeError, 'please provide a module to run')
 
-        subprocess.run(['python3', '-m', 'unittest', f'{module}'])
+        subprocess.run(['python3', '-m', 'unittest', f'{module}'], cwd=cwd)
 
     def test_dir(self, cwd:str, dir=None):
         """

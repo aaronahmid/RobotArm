@@ -1,6 +1,4 @@
-[2022-04-03 01:30:10 +0100] [11956] [INFO] Starting gunicorn 20.1.0
-[2022-04-03 01:30:10 +0100] [11956] [INFO] Listening at: http://0.0.0.0:5555 (11956)
-[2022-04-03 01:30:10 +0100] [11956] [INFO] Using worker: sync
-[2022-04-03 01:30:10 +0100] [11958] [INFO] Booting worker with pid: 11958
-[2022-04-03 13:56:14 +0100] [11958] [INFO] Parent changed, shutting down: <Worker 11958>
-[2022-04-03 13:56:14 +0100] [11958] [INFO] Worker exiting (pid: 11958)
+[2022-04-23 22:52:51 +0100] [3863] [INFO] Starting gunicorn 20.1.0
+[2022-04-23 22:52:51 +0100] [3863] [INFO] Listening at: http://0.0.0.0:5555 (3863)
+[2022-04-23 22:52:51 +0100] [3863] [INFO] Using worker: sync
+[2022-04-23 22:52:51 +0100] [3865] [INFO] Booting worker with pid: 3865

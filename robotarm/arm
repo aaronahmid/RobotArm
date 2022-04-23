@@ -26,7 +26,7 @@ COMMAND_CONTROLLERS = {
 
 # mappings for test controllers
 TEST_CONTROLLERS = {
-    'run': 'cotrollers.TestController().run'
+    'run': 'controllers.TestController().run'
 }
 
 # mappings for api service controller

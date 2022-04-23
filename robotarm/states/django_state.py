@@ -2,7 +2,7 @@
 """
 contains Django State
 """
-from  states.base_state import BaseState
+from robotarm.states.base_state import BaseState
 
 
 class DjangoState(BaseState):

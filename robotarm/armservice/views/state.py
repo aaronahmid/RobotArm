@@ -60,7 +60,6 @@ def activate_state(state_id):
     state = StateHandler().activate(state_id)
     return make_response(str(state), 200)
 
-
 @api_views.route('/states/get_working_dir/',
                  methods=['GET'], strict_slashes=False)
 def working_dir():

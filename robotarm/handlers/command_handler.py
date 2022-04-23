@@ -2,8 +2,8 @@
 """
 Command Handler module
 """
-import states
-from handlers import StateHandler
+from robotarm import states
+from robotarm.handlers import StateHandler
 
 
 class CommandHandler:

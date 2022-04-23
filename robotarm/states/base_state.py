@@ -4,7 +4,7 @@ Contains class BaseState
 """
 
 from datetime import datetime
-import states
+from robotarm import states
 import uuid
 
 

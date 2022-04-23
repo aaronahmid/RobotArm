@@ -3,7 +3,7 @@
 State Controller Module
 """
 import subprocess
-from  controllers import proxy_url
+from robotarm.controllers import proxy_url
 import requests
 import pathlib
 import psutil

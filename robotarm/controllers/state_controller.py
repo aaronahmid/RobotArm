@@ -2,8 +2,9 @@
 """
 State Controller Module
 """
-from controllers import proxy_url
+from robotarm.controllers import proxy_url
 import requests
+from tabulate import tabulate
 
 # TODO: Make an Error Handler That provides Error codes, details and a logfile
 # TODO: Decide on API request pattern
@@ -187,7 +188,6 @@ class StateController:
         else:
             print('error: something is not right')
             
-    # method not completed
     def list(self, args):
         """
         performs a list action by triggering the states/list/
@@ -195,10 +195,19 @@ class StateController:
         del(args)
         
         headers = {'content-type': 'application/json'}
-        url = self.__base_api + 'list/'
+        url = self.__base_api
         request = requests.get(url, headers=headers)
 
         if request.status_code == 200:
-            rd = dict(request.json())
-            print(f'{len(rd.keys())} states')
-            print(rd)
+            print('here')
+            states = dict(request.json())
+
+            activated = states['current_state']
+            state_list = []
+            for key, value in states.items():
+                if key != activated['id']:
+                    state_list.append([value['project_name'] , key])
+                else:
+                    state_list.append([value['project_name'] , key, '*'])
+            print(tabulate(state_list.insert(0, ['name', 'id', 'activated']), headers='firstrow'))
+
