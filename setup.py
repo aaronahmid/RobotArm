@@ -32,7 +32,7 @@ setuptools.setup(
 
     ],
 
-    install_requires=['gunicorn', 'flask', 'pyyaml', 'python-decouple', 'requests'],
+    install_requires=['gunicorn', 'flask', 'pyyaml', 'python-decouple', 'requests', 'psutil', 'tabulate'],
     package_dir={"": "robotarm"},
     packages=setuptools.find_packages(
         where='.',

@@ -11,7 +11,7 @@ import psutil
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 #print(BASE_DIR)
 
-class APIServiceController:
+class APIServiceController():
     """
     contolls api service
 
