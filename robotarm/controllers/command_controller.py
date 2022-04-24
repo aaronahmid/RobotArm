@@ -9,7 +9,7 @@ import os
 
 # TODO: create methods to run scritps added in yaml file
 
-class CommandController:
+class CommandController():
     """
     communicates with appropiate command api service for the
     command handler, performs several command actions

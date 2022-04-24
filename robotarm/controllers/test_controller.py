@@ -7,7 +7,7 @@ from  robotarm.controllers import proxy_url
 import requests
 import shlex
 
-class TestController:
+class TestController():
     """
     communicates with appropiate api test service
     and performs several test actions
