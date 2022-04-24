@@ -31,8 +31,9 @@ RobotArm is micro automation tool that enables easy creation and management of d
 
 - create a state
 > ``arm [-s, --state] create full/path/file_name.yaml (tips: `pwd`\file_name.yaml)``
-> please get the state_id before you clear your screen
-> yeah! I know I know, I should make a fancy list state feature (working on IT!!)
+
+- list available states
+> ``arm [-s, --state] list
 
 - activate state
 > ``arm [-s, --state] activate state_id``
