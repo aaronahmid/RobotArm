@@ -33,7 +33,7 @@ RobotArm is micro automation tool that enables easy creation and management of d
 > ``arm [-s, --state] create full/path/file_name.yaml (tips: `pwd`\file_name.yaml)``
 
 - list available states
-> ``arm [-s, --state] list
+> ``arm [-s, --state] list``
 
 - activate state
 > ``arm [-s, --state] activate state_id``
