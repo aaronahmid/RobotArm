@@ -19,8 +19,8 @@ RobotArm is micro automation tool that enables easy creation and management of d
 > the current versions only runs on ubuntu-20.04
 > download latest release
 > and run the setup.py script
-> if setup.py does not set things up correctly, run the ./temp_setup script
-> ## To install, make use of tempoary install script for now
+> if setup.py does not set things up correctly, run the ./install.sh script
+> ## To install, make use of the tempoary bash install.sh script for now
 
 ## Basics
 - start arm api service
