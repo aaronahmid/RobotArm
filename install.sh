@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # TEMPORARY INSTALL SCRIPT
 # This scripts adds the robotarm directory
-# to users PATH
+# to users bin PATH
+# and adds robotarm to PYTHONPATH
 
 # current working directory of this scripts
 PATH_TO_PACKAGE="$(pwd)"
