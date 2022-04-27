@@ -2,12 +2,15 @@
 """
 RobotArm entry script v0.02
 """
-import controllers
 import os
 import pathlib
 import sys
 
-# BASE_DIR = pathlib.Path(__file__).resolve().parent
+#BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+#sys.path.append(BASE_DIR)
+#print(BASE_DIR)
+
+from robotarm import controllers
 
 # mappings for state controllers
 STATE_CONTROLLERS = {

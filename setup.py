@@ -1,14 +1,14 @@
 import setuptools
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
-
     long_description = fh.read()
 
-setuptools.setup(
+setup(
 
     name="robotarm", # Replace with your username
 
-    version="0.0.3",
+    version="0.0.4",
 
     author="<Aaron Ahmid Balogun>",
 
@@ -34,7 +34,7 @@ setuptools.setup(
 
     install_requires=['gunicorn', 'flask', 'pyyaml', 'python-decouple', 'requests', 'psutil', 'tabulate'],
     package_dir={"": "robotarm"},
-    packages=setuptools.find_packages(
+    packages=find_packages(
         where='.',
         include=['robotarm*'],  # ["*"] by default
         exclude=['robotarm.tests'],  # empty by default

@@ -2,7 +2,7 @@
 """
 API index views module
 """
-from armservice.views import api_views
+from robotarm.armservice.views import api_views
 from flask import jsonify
 
 
