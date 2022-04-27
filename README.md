@@ -20,7 +20,7 @@ RobotArm is micro automation tool that enables easy creation and management of d
 > download latest release
 > and run the setup.py script
 > if setup.py does not set things up correctly, run the ./install.sh script
-> ## To install, make use of the tempoary bash install.sh script for now
+> ## To install, make use of the tempoary bash ``install.sh`` script for now
 
 ## Basics
 - start arm api service
