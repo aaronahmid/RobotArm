@@ -1,6 +1,6 @@
 # ROBOT-ARM
 
-RobotArm is micro automation tool that enables easy creation and management of development environtments.
+RobotArm is a configuration management and automation tool that enables easy creation and management of development environtments.
 
 ## Features
 - start and stop the arm service easily
