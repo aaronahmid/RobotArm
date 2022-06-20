@@ -33,7 +33,7 @@ setup(
     ],
 
     install_requires=['gunicorn', 'flask', 'pyyaml', 'python-decouple', 'requests', 'psutil', 'tabulate'],
-    package_dir={"": "robotarm"},
+    package_dir={},
     packages=find_packages(
         where='.',
         include=['robotarm*'],  # ["*"] by default
@@ -42,13 +42,17 @@ setup(
 
     python_requires=">=3.6",
 
-    py_modules=['arm', 'robotarm', 'controllers', 'handlers', 'armservice'],
+    py_modules=['arm'],
 
     entry_points={
     'console_scripts': [
-        'arm=Robot-Arm.robotarm.arm:main',
+        'arm=arm:main',
+        #'start_arm=start_arm_api:main'
     ],
-},
+    },
+    scripts=['robotarm/arm.py',
+    #'robotarm/scripts/start_arm_api.py',
+   ]
 
 )
 

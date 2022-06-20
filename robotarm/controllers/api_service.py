@@ -9,7 +9,7 @@ import pathlib
 import psutil
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
-#print(BASE_DIR)
+print(BASE_DIR)
 
 class APIServiceController():
     """
@@ -26,7 +26,7 @@ class APIServiceController():
         starts the api service process
         """
         with open(f'{BASE_DIR}/logfile', mode='w', encoding='utf8') as file:
-            subprocess.Popen([f'./scripts/{self.__api_start_script}'], stderr=file, cwd=BASE_DIR)
+            subprocess.Popen([f'scripts/{self.__api_start_script}'], stderr=file, cwd=BASE_DIR)
     
     def stop_service(self):
         """
