@@ -64,7 +64,7 @@ RobotArm is a configuration management and automation tool that enables easy cre
 
 ### Arm currently only supports only the django web framwork, when using with a framwork
 
-> this tool is not ready for use, it's not completed and there are several bugs, not yet documented properly, installation method not concluded yet, to use start the api service, add the dir to path or create an alias to the arm script or use the recomended temporary setup shell script. Use with care.
+> this tool is not ready for use, it's not completed and there are several bugs, not yet documented properly. Use with care!!
 
 > Contribute?? Uhhhhhhhhm! Nope Not yet...
 
