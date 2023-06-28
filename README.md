@@ -1,6 +1,6 @@
 # ROBOT-ARM
 
-RobotArm is a configuration management and automation tool that enables easy creation and management of development environtments.
+RobotArm is a Python dev configuration management and automation tool that enables quick and easy creation and management of development environments.
 
 ## Features
 - start and stop the arm service easily
@@ -17,7 +17,7 @@ RobotArm is a configuration management and automation tool that enables easy cre
 
 ## How to install
 
-> the current versions only runs on Ubuntu-20.04+
+> The current versions only run on Ubuntu-20.04+
 
 - download latest release
 - install with pip
@@ -62,7 +62,7 @@ RobotArm is a configuration management and automation tool that enables easy cre
 ![yaml_file_template](https://user-images.githubusercontent.com/41565098/161405937-e4ecefe8-738b-434e-9666-4ab98f40be64.jpg)
 --------------------------------------------------------------------------------------------------------------------------
 
-### Arm currently only supports only the django web framwork, when using with a framwork
+### Arm currently only supports only the Django web framwork, when used with a framework
 
 > this tool is not ready for use, it's not completed and there are several bugs, not yet documented properly. Use with care!!
 
