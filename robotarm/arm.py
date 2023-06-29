@@ -83,6 +83,8 @@ garbage command option\n\narm [-option, --option] \
     # check if option is version or help
     if args_length == 2:
         # Prints arm script version or help
+
+        print(option)
         if option in ('-v', '-h', '--version', '--help'):
             for option_keywords in options.keys():
                 if option in option_keywords:
@@ -101,14 +103,18 @@ garbage command option\n\narm [-option, --option] \
         try:
             if keyword_option is COMMAND_CONTROLLERS:
                 try:
-                    eval(keyword_option[args[0]])(args)
+                    function = eval(keyword_option[args[0]])
+                    function(args)
                 except KeyError:
-                    eval(keyword_option['execute'])(args)
+                    function = eval(keyword_option['execute'])
+                    function(args)
                 exit()
             if keyword_option is API_SERVICE_CONTROLLERS:
-                eval(keyword_option[args[0]])()
+                function = eval(keyword_option[args[0]])
+                function()
             else:
-                eval(keyword_option[args[0]])(args)
+                function = eval(keyword_option[args[0]])
+                function(args)
         except UnboundLocalError:
             exit(arm_usage)
     except KeyError:

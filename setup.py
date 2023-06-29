@@ -1,3 +1,6 @@
+from setuptools.command.install import install
+from setuptools.command.develop import develop
+from setuptools import setup
 import setuptools
 from setuptools import setup, find_packages
 
@@ -8,7 +11,7 @@ setup(
 
     name="robotarm", # Replace with your username
 
-    version="0.1.4",
+    version="0.1.9",
 
     author="<Aaron Ahmid Balogun>",
 
@@ -51,6 +54,7 @@ setup(
     ],
     },
     scripts=['robotarm/arm.py',
+             'robotarm/scripts/start_arm_api.py'
     #'robotarm/scripts/start_arm_api.py',
    ]
 

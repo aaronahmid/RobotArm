@@ -9,7 +9,7 @@ import pathlib
 import psutil
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
-print(BASE_DIR)
+#print(BASE_DIR)
 
 class APIServiceController():
     """
@@ -20,28 +20,34 @@ class APIServiceController():
     """
     __api_start_script = 'start_arm_api.py'
     __base_api = proxy_url + '/status'
+    __pid: int
 
     def start_service(self):
         """
         starts the api service process
         """
-        with open(f'{BASE_DIR}/logfile', mode='w', encoding='utf8') as file:
-            subprocess.Popen([f'python scripts/{self.__api_start_script}'], stderr=file, cwd=BASE_DIR)
-    
+        try:
+            dir = f'{BASE_DIR}/scripts'
+            with open(f'{BASE_DIR}/logfile', mode='w', encoding='utf8') as file:
+                subprocess.Popen(
+                    ['python3', f'./scripts/{self.__api_start_script}'], stderr=file, cwd=BASE_DIR)
+        except Exception as error:
+            raise Exception({'error': 'could not start api server',
+                             'details': error})
+
     def stop_service(self):
         """
         stops the api service process
         """
-        p_name = self.__api_start_script
-        for proc in psutil.process_iter(['pid', 'name']):
-            if p_name == proc.name():
-                script_process = proc
+        try:
+            p_name = 'gunicorn'
+            for proc in psutil.process_iter(['pid', 'name']):
+                if p_name == proc.name():
+                    script_process = proc
+                    script_process.kill()
+        except ProcessLookupError:
+            raise Exception(f'process with name {p_name} could not be found')
 
-        pid = script_process.pid    # get the pid before killing
-        script_process.kill()
-        server_process = psutil.Process(pid + 1)
-        if server_process.name() == 'gunicorn':
-            server_process.kill()
 
     def health_check(self):
         """
