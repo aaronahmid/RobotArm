@@ -5,10 +5,54 @@ A helper module
 import os
 import subprocess
 import pathlib
+import sys
 
-#BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+try:
+    from decouple import config as getenv
+except ModuleNotFoundError:
+    print(
+        "python decouple not found, please install\
+using os.getenv for now but some things won't work"
+    )
+    from os import getenv
 
-# TODO: implemet a way to install requirements.txt file into the python envionment
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+setup_db_file = 'setupdb'
+
+
+def install_db():
+    """installs a database by running script
+    """
+    install_pgsql = ['./scripts/install_postgresql_server']
+    subprocess.run(install_pgsql, cwd=BASE_DIR)
+
+
+def create_db(db_name: str, user: str, h=None, p=None, E=None):
+    """creates a postgresql database
+    """
+    if type(db_name) and type(user) != str:
+        TypeError('unexpected argument type provided for db_name or user\
+            , must be a string')
+
+    if len(db_name) == 0:
+        db_name = 'proj-dev-db-local1'
+
+    host = 'localhost'
+    port = 5432
+    enconding = 'utf8'
+    if h and p and E != None:
+        host = h
+        port = p
+        enconding = E
+
+    create_db_args = f'createdb/-U {user}/-h{host}/-p {port}/-E {enconding}/{db_name}'.split(
+        sep='/')
+    with open('logfile', mode='w+', encoding='utf8') as logfile:
+        try:
+            os.system(' '.join(create_db_args))
+        except Exception:
+            raise(Exception)
+    print(f'database {db_name} created with user {user}.')
 
 
 def mkVenvLinux(vpath):
@@ -41,25 +85,28 @@ def mkVenvLinux(vpath):
 # TODO: fix database helper
 
 
-def installPostgres():
-    """
-    installs a postgresql database server
-    """
-    with open(f'{BASE_DIR}/logfile', mode='w', encoding='utf8') as file:
-        subprocess.run(['./install_postgresql_server'],
-                       stderr=file, cwd=f'{BASE_DIR}/scripts')
-
-
-def postgresCreate(db_name, db_user, db_host='localhost', db_port='5432'):
+def postgresCreate(db_name, db_user, db_host='localhost', db_port='5432', password=None):
     """
     creates a postgresql database
     """
-    installPostgres()
-    print('creating postgresql database...')
-    with open('{BASE_DIR}/logfile', mode='w', encoding='utf8') as file:
-        subprocess.run([
-            'createdb',
-            f'-h {db_host}',
-            f'-p {db_port}',
-            f'-U {db_user}',
-            f'{db_name}'], stderr=file)
+    idb = input('install a postgresql db (y/n)? ')
+    if idb != ('n', 'No', 'no', 'NO'):
+        try:
+            install_db()
+        except Exception as e:
+            print(str(e))
+
+    cdb = input('create a postgresql database (y/n)? ')
+    if cdb != ('n', 'No', 'no', 'NO'):
+        #dbname = input('dbname default(proj-dev-db-local1): ')
+        #username = input('user: ')
+        #host = input('host default(localhost): ')
+        #port = input('port default(5432): ')
+        #econding = input('encoding default(utf8): ')
+        if db_user.startswith('[') and db_user.endswith(']'):
+            db_user = db_user.strip('[]')
+            db_user = getenv(db_user)
+        try:
+            create_db(db_name=db_name, user=db_user)
+        except Exception as e:
+            print(str(e))

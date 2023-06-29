@@ -9,6 +9,7 @@ import os
 
 # TODO: create methods to run scritps added in yaml file
 
+
 class CommandController():
     """
     communicates with appropiate command api service for the
@@ -35,11 +36,11 @@ class CommandController():
         url = self.__base_api + 'get_entry_command/'
         # should return path to working directory and entry command
         res = requests.get(url, headers=headers)
-        
+
         # check status code
         if res.status_code == 200:
             state_dict = dict(res.json())
-            
+
         # get working dir and entry command
         working_dir = state_dict['working_dir']
         entry_command = state_dict['entry_command']

@@ -3,9 +3,10 @@
 Test Controller module
 """
 import subprocess
-from  robotarm.controllers import proxy_url
+from robotarm.controllers import proxy_url
 import requests
 import shlex
+
 
 class TestController():
     """
@@ -71,7 +72,7 @@ class TestController():
 
         # send get request to endpoint
         response = requests.get(url, headers=headers)
-        
+
         # check status code
         if response.status_code == 200:
             return response.json().get('working_dir')
@@ -91,7 +92,7 @@ class TestController():
                 Args: dir[str], cwd[str]
                 Description: tries to discover tests in specified directory
                 Return: None
-            
+
             -D, --test_dir:
                 Args: dir[None], cwd[str]
                 Description: tries to discover tests in test folder specified in
@@ -120,20 +121,22 @@ class TestController():
                 run_option = args[0]
             except IndexError:
                 exit('error: expected a run option')
-            
+
             # tries to map and run
             # a test option
             try:
                 extra_arg = args[1]
                 for keyword_options in run_options.keys():
                     if run_option in keyword_options:
-                        eval(run_options[keyword_options])(args[1], working_dir)
+                        eval(run_options[keyword_options])(
+                            args[1], working_dir)
             except IndexError:
                 exit('error: expected extra argument')
         else:
-            subprocess.run(['python3', '-m', 'unittest', 'discover'], cwd=working_dir)
+            subprocess.run(['python3', '-m', 'unittest',
+                           'discover'], cwd=working_dir)
 
-    def test_module(self, module:str, cwd:str):
+    def test_module(self, module: str, cwd: str):
         """
         tries to run a test module
         """
@@ -142,14 +145,15 @@ class TestController():
 
         subprocess.run(['python3', '-m', 'unittest', f'{module}'], cwd=cwd)
 
-    def test_dir(self, cwd:str, dir=None):
+    def test_dir(self, cwd: str, dir=None):
         """
         tries to discover tests in giving directory
         """
         if dir:
-            subprocess.run(['python3', '-m', 'unittest', '-s', f'{dir}'], cwd=cwd)
+            subprocess.run(
+                ['python3', '-m', 'unittest', '-s', f'{dir}'], cwd=cwd)
             exit('test run completed')
-        
+
         test_folder = self.get_tests_folder()
-        subprocess.run(['python3', '-m', 'unittest', '-s', f'{test_folder}'], cwd=cwd)
-        
+        subprocess.run(['python3', '-m', 'unittest',
+                       '-s', f'{test_folder}'], cwd=cwd)

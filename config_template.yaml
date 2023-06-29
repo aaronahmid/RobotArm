@@ -1,27 +1,22 @@
----
-project_name: newproj
-version: v1.0.1
+name: error-response-handler
+version: v0.0.1
 
-git_repo: https://github.com/AmidBidee/newproj
-git_repo_ssh: git@github.com/AmidBidee/newproj
+wdir: .
+frameworks: none
 
-working_dir: /home/krummitz_wx/projects/new_proj
+venvs:
+  - ./venv
 
-framework: django
-
-virtual_venvs:
-  - /home/krummitz_wx/projects/new_proj/newproj-venv
-
-# Please use a .env or secrets file to store more information
-# like password etc, robotarm would not handle sensitive informations
 database:
-  - name: aldabradb-dev-local
+  - name: error-handler-db
     type: postgresql
-    version: '*'
-    user: krummitz_wx
+    user: [DB_USER]
+    password: [DB_PASSWORD]
+    host: [DB_HOST]
+    port: [DB_PORT]
 
 
 tests:
   - tool: unittest
-    discovery_dir: /home/krummitz_wx/projects/new_proj
-    test_dir: /home/krummitz_wx/projects/new_proj/tests
+    discovery: .
+    test_dir: tests

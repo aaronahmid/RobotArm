@@ -61,7 +61,7 @@ def main():
     args_length = len(args)  # store args length
 
     arm_usage = "error: \
-garbage keyword option\n\narm [-option, --option] \
+garbage command option\n\narm [-option, --option] \
 [action]\n\ntry arm \
 [-h, --help]\n For help text"
 
@@ -112,7 +112,7 @@ garbage keyword option\n\narm [-option, --option] \
         except UnboundLocalError:
             exit(arm_usage)
     except KeyError:
-        exit('Unknown keyword option action')
+        exit('Unknown command option')
 
 
 # runs the main funtion

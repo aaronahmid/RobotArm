@@ -9,6 +9,7 @@ from tabulate import tabulate
 # TODO: Make an Error Handler That provides Error codes, details and a logfile
 # TODO: Decide on API request pattern
 
+
 class StateController():
     """
     Performs the following actions by triggering the right api states service
@@ -41,18 +42,18 @@ class StateController():
             file_name = args[1]
         except IndexError:
             exit('error: file name/path not supplied')
-            
+
         # builds data json data sent
         # headers
         # and url endpoint
         data = {"file": f"{file_name}"}
         headers = {'content-type': 'application/json'}
         url = self.__base_api + 'create/'
-        
+
         # sends a post request to the url endpoint
         # with above data and headers
         request = requests.post(url, json=data, headers=headers)
-        
+
         # checks status code
         # collects response data
         # and prints an output
@@ -85,17 +86,17 @@ class StateController():
             state_id = args[1]
         except IndexError:
             exit('error: environment "state id" not supplied')
-            
+
         # builds data json data sent
         # headers
         # and url endpoint
         headers = {'content-type': 'application/json'}
         url = self.__base_api + f'{state_id}/activate/'
-        
-        # sends a put request to the url endpoint 
-        # with the following headers above 
+
+        # sends a put request to the url endpoint
+        # with the following headers above
         request = requests.put(url, headers=headers)
-        
+
         # checks status code
         # if state exist
         # prints an output
@@ -105,7 +106,7 @@ class StateController():
                 print("run 'source scripts/env' to activate and load venv")
                 print("then you can run 'activate' or 'deactivate'")
         elif request.status_code == 404:
-                print('error: state does not exist')
+            print('error: state does not exist')
         else:
             print('error: something is not right')
 
@@ -130,17 +131,17 @@ class StateController():
             state_id = args[1]
         except IndexError:
             exit('error: environment "state id" not supplied')
-            
+
         # builds data json data sent
         # headers
         # and url endpoint
         headers = {'content-type': 'application/json'}
         url = self.__base_api + f'{state_id}/stop/'
-        
-        # sends a put request to the url endpoint 
+
+        # sends a put request to the url endpoint
         # with the following headers above
         request = requests.put(url, headers=headers)
-        
+
         # checks status code
         # prints an output
         if request.status_code == 200:
@@ -169,14 +170,14 @@ class StateController():
             state_id = args[1]
         except IndexError:
             exit('error: environment "state id" not supplied')
-            
+
         # builds data json data sent
         # headers
         # and url endpoint
         headers = {'content-type': 'application/json'}
         url = self.__base_api + f'{state_id}/delete/'
-        
-        # sends a put request to the url endpoint 
+
+        # sends a put request to the url endpoint
         # with the following headers above
         request = requests.post(url, headers=headers)
 
@@ -188,13 +189,13 @@ class StateController():
             print('error: state does not exist')
         else:
             print('error: something is not right')
-            
+
     def list(self, args):
         """
         performs a list action by triggering the states/
         """
         del(args)
-        
+
         headers = {'content-type': 'application/json'}
         url = self.__base_api
         request = requests.get(url, headers=headers)
@@ -214,4 +215,3 @@ class StateController():
 
             state_list.insert(0, ['name', 'id', 'activated'])
             print(tabulate(state_list, headers='firstrow'))
-

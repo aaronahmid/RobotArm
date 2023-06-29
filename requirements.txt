@@ -3,3 +3,4 @@ flask
 pyyaml
 psutil
 tabulate
+python-decouple==3.6

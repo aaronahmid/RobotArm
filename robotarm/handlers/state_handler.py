@@ -3,6 +3,7 @@
 Contains Handler for handling states related funtions
 """
 from flask import current_app
+from robotarm.states.base_state import BaseState
 from robotarm.states.django_state import DjangoState
 from robotarm.handlers import helpers
 import os
@@ -58,7 +59,7 @@ class StateHandler:
         state = states.storage.setCurrentState(id)
         states.storage.save()
 
-        wd = state.working_dir
+        wd = state.wdir
         if os.path.isdir(wd) and os.getcwd() != wd:
             os.chdir(wd)
 
@@ -94,10 +95,10 @@ class StateHandler:
         yaml_dict = self.parseYamlFile(file_name)
 
         if yaml_dict:
-            framework = yaml_dict['framework']
+            framework = yaml_dict.get('framework', None)
 
-            if framework in self.SUPPORTED_FRAMEWORKS.keys():
-                state = eval(self.SUPPORTED_FRAMEWORKS[framework])(**yaml_dict)
+            if framework and framework in self.SUPPORTED_FRAMEWORKS.keys():
+                state = BaseState(**yaml_dict)
                 state.save()
                 print('---state saved---')
 
@@ -110,6 +111,18 @@ class StateHandler:
                 print('done.')
                 return state
             else:
+                state = eval(self.SUPPORTED_FRAMEWORKS[framework])(**yaml_dict)
+                state.save()
+                print('---state saved---')
+
+                # print('activating state...')
+                # state = self.activate(state.id)
+                #print(f'{state.project_name} activated')
+
+                print('setting up environment, this may take a few minutes...')
+                self.provisionEnv(state)
+                print('done.')
+                return state
                 exit('Unsurppoted framework')
 
     def deleteState(self, id):
@@ -155,6 +168,24 @@ class StateHandler:
         state_dict['current_state'] = states_objs['current_state']
         
         return state_dict
+    
+    @staticmethod
+    def create_virtual_env(name: str, vpath: str) -> bool:
+        try:
+            created = helpers.mkVenvLinux(vpath)
+        except Exception as error:
+            raise Exception({'error': f'an error occured while creating a the virtual environment {name}',
+                             'details': error})
+        return created
+    
+    def setup_database(self, type: str, database_config: dict) -> bool:
+        try:
+            function = eval(self.SUPPORTED_DATABASE['type'])
+            created = function(**database_config)
+        except Exception as error:
+            raise Exception({'error': 'an error occured while creating database',
+                             'details': error})
+        return created
 
     def provisionEnv(self, state):
         """
@@ -163,22 +194,28 @@ class StateHandler:
         Args:
             state [__class__]: a __class__.BaseState object
         """
-        wd = state.working_dir
+        wd = state.wdir
         if os.path.isdir(wd) and os.getcwd() != wd:
             os.chdir(wd)
+        
 
-        if state.virtual_venvs:
-            venvs = state.virtual_venvs
-            vpath = venvs[0]
-            created = helpers.mkVenvLinux(vpath)
+        if state.venvs:
+            answer = input('a virtual environment config was found, would you like\
+                        to create a one (y/n)? ')
+            if answer not in ('n', 'No', 'no', 'NO'):
+                venvs = state.venvs
+                for name in venvs:
+                    vpath = f'{wd}/{name}'
+                    created = self.create_virtual_env(name, vpath)
+                if created:
+                    print(f'created virtual environment at {vpath}')
+                
 
-            if created:
-                print(f'created virtual environment at {vpath}')
+        if state.databases:
+            answer = input('a database config was found, would you like\
+                        to setup one (y/n)? ')
+            if answer not in ('n', 'No', 'no', 'NO'):
+                databases = state.databases
+                for database in databases:
+                    self.setup_database()
 
-        # if state.database:
-        #     database = state.database[0]
-        #     try:
-        #         print(database)
-        #         eval(self.SUPPORTED_DATABASE[database['type']])(database['name'], database['user'])
-        #     except Exception as e:
-        #         raise(e)
