@@ -8,7 +8,7 @@ setup(
 
     name="robotarm", # Replace with your username
 
-    version="0.0.4",
+    version="0.1.1",
 
     author="<Aaron Ahmid Balogun>",
 
@@ -50,7 +50,7 @@ setup(
         #'start_arm=start_arm_api:main'
     ],
     },
-    scripts=['robotarm/arm.py',
+    scripts=['robotarm/arm',
     #'robotarm/scripts/start_arm_api.py',
    ]
 
