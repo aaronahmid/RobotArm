@@ -50,7 +50,7 @@ setup(
         #'start_arm=start_arm_api:main'
     ],
     },
-    scripts=['robotarm/arm',
+    scripts=['robotarm/arm.py',
     #'robotarm/scripts/start_arm_api.py',
    ]
 
