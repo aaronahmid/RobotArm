@@ -42,7 +42,7 @@ class CommandController():
             state_dict = dict(res.json())
 
         # get working dir and entry command
-        working_dir = state_dict['working_dir']
+        working_dir = state_dict['wdir']
         entry_command = state_dict['entry_command']
 
         args.insert(0, entry_command)   # build the command list

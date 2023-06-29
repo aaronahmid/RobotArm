@@ -3,6 +3,7 @@
 RobotArm is a Python dev configuration management and automation tool that enables quick and easy creation and management of development environments.
 
 ## Features
+
 - start and stop the arm service easily
 - Easily create development evironment from a yaml file as states
 - run management commands easily from any directory in your terminal
@@ -10,6 +11,7 @@ RobotArm is a Python dev configuration management and automation tool that enabl
 - manage your virtual environments without breaking a sweat
 
 ## Future Features
+
 - create ci/cd cycles from yaml files
 - use multiple environments
 - provision development databases easily
@@ -59,14 +61,40 @@ RobotArm is a Python dev configuration management and automation tool that enabl
 
 ## Yaml Config File Template
 
-![yaml_file_template](https://user-images.githubusercontent.com/41565098/161405937-e4ecefe8-738b-434e-9666-4ab98f40be64.jpg)
---------------------------------------------------------------------------------------------------------------------------
+```yaml
+name: error-response-handler
+version: v0.0.1
+
+git: https://github.com/aaronahmid/error-response-handler
+git_ssh: git@github.com/aaronahmid/error-response-handler
+
+wdir: /home/.../.../error-response-handler
+frameworks: none
+
+venvs:
+  - venv
+
+databases:
+  - name: error-handler-db
+    type: postgresql
+    user: [DB_USER]
+    password: [DB_PASSWORD]
+    host: [DB_HOST]
+    port: [DB_PORT]
+
+
+tests:
+  - tool: unittest
+    discovery: .
+    test_dir: tests
+
+```
+
+------------------------------------------------------------------------------------------------------------------------
 
 ### Arm currently only supports only the Django web framwork, when used with a framework
 
 > this tool is not ready for use, it's not completed and there are several bugs, not yet documented properly. Use with care!!
-
 > Contribute?? Uhhhhhhhhm! Nope Not yet...
-
 > To infinity and beyond
 > -Buzz Lightyear's

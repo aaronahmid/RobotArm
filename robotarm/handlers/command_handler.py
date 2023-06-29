@@ -21,7 +21,7 @@ class CommandHandler:
         current_state = StateHandler().getCurrentState()
 
         response_dict = {
-            'working_dir': current_state.working_dir,
+            'working_dir': current_state.wdir,
             'entry_command': current_state.entry_command
         }
         return response_dict

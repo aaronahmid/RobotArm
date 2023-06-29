@@ -5,9 +5,9 @@ wdir: .
 frameworks: none
 
 venvs:
-  - ./venv
+  - venv
 
-database:
+databases:
   - name: error-handler-db
     type: postgresql
     user: [DB_USER]
