@@ -18,7 +18,7 @@ class APIServiceController():
     actions:
         health_check: checks api status
     """
-    __api_start_script = 'start_arm_api'
+    __api_start_script = 'start_arm_api.py'
     __base_api = proxy_url + '/status'
 
     def start_service(self):
@@ -26,7 +26,7 @@ class APIServiceController():
         starts the api service process
         """
         with open(f'{BASE_DIR}/logfile', mode='w', encoding='utf8') as file:
-            subprocess.Popen([f'scripts/{self.__api_start_script}'], stderr=file, cwd=BASE_DIR)
+            subprocess.Popen([f'python scripts/{self.__api_start_script}'], stderr=file, cwd=BASE_DIR)
     
     def stop_service(self):
         """
