@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-RobotArm entry script v0.02
+RobotArm entry script v0.1.0
 """
 import os
 import pathlib
@@ -47,7 +47,7 @@ def main():
     """
     # maps keyword options to controller mappings
     options = {
-        ('-v', '--version'): 'v0.01',
+        ('-v', '--version'): 'v0.1.2',
         ('-h', '--help'): 'help',
         ('-s', '--state'): STATE_CONTROLLERS,
         ('-c', '--command'): COMMAND_CONTROLLERS,
