@@ -22,6 +22,7 @@ RobotArm is a Python dev configuration management and automation tool that enabl
 > The current versions only run on Ubuntu-20.04+
 
 - download latest release
+- extract source file
 - install with pip
 
 > ``pip install .``
