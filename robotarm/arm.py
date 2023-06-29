@@ -47,7 +47,7 @@ def main():
     """
     # maps keyword options to controller mappings
     options = {
-        ('-v', '--version'): 'v0.1.2',
+        ('-v', '--version'): 'v0.1.4',
         ('-h', '--help'): 'help',
         ('-s', '--state'): STATE_CONTROLLERS,
         ('-c', '--command'): COMMAND_CONTROLLERS,
