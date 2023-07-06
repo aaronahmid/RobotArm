@@ -5,7 +5,7 @@ RobotArm is a Python dev configuration management and automation tool that enabl
 ## Features
 
 - start and stop the arm service easily
-- Easily create development environment from a yaml file as states
+- Easily create a python development environment from a yaml file as states
 - run management commands easily from any directory in your terminal
 - run tests easily from any directory in your terminal
 - manage your virtual environments without breaking a sweat
