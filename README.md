@@ -69,19 +69,21 @@ version: v0.0.1
 git: https://github.com/aaronahmid/error-response-handler
 git_ssh: git@github.com/aaronahmid/error-response-handler
 
-wdir: /home/.../.../error-response-handler
-frameworks: none
+wdir: /home/krummitz/projects/error-response-handler
 
 venvs:
-  - venv
+  - name: venv
+    dir: .
+    on_create: true
 
 databases:
   - name: error-handler-db
     type: postgresql
-    user: [DB_USER]
-    password: [DB_PASSWORD]
-    host: [DB_HOST]
-    port: [DB_PORT]
+    user: krumitz
+    password: '[DB_PASSWORD]'
+    host: '[DB_HOST]'
+    port: '[DB_PORT]'
+    on_create: true
 
 
 tests:
