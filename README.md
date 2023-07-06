@@ -5,23 +5,23 @@ RobotArm is a Python dev configuration management and automation tool that enabl
 ## Features
 
 - start and stop the arm service easily
-- Easily create development evironment from a yaml file as states
+- Easily create development environment from a yaml file as states
 - run management commands easily from any directory in your terminal
 - run tests easily from any directory in your terminal
 - manage your virtual environments without breaking a sweat
+- provision development databases easily (currently supports PostgreSQL
 
 ## Future Features
 
 - create ci/cd cycles from yaml files
 - use multiple environments
-- provision development databases easily
 - setting up local git repo, and using git commands easily from any directory in your terminal
 
 ## How to install
 
 > The current versions only run on Ubuntu-20.04+
 
-- download latest release
+- download the latest release
 - extract source file
 - install with pip
 
@@ -29,12 +29,12 @@ RobotArm is a Python dev configuration management and automation tool that enabl
 
 ## Basics
 
-- start arm api service
+- start arm API service
 
 > `` arm service start ``
-> confirm apis are running ``arm service status``
+> confirm APIs are running ``arm service status``
 
-- to stop the api service
+- to stop the API service
 
 > `` arm service stop ``
 
@@ -42,7 +42,7 @@ RobotArm is a Python dev configuration management and automation tool that enabl
 
 > ``arm [-s, --state] create full/path/file_name.yaml (tips: `pwd`\file_name.yaml)``
 
-- list available states
+- list of available states
 
 > ``arm [-s, --state] list``
 
@@ -93,9 +93,9 @@ tests:
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### Arm currently only supports only the Django web framwork, when used with a framework
+### Arm currently only supports only the Django web framework, when used with a framework
 
-> this tool is not ready for use, it's not completed and there are several bugs, not yet documented properly. Use with care!!
+> This tool is not totally safe, it's not completed and there are several bugs, not yet documented properly. Use with care!!
 > Contribute?? Uhhhhhhhhm! Nope Not yet...
 > To infinity and beyond
 > -Buzz Lightyear's
