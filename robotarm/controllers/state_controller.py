@@ -8,7 +8,7 @@ from tabulate import tabulate
 
 # TODO: Make an Error Handler That provides Error codes, details and a logfile
 # TODO: Decide on API request pattern
-
+from robotarm.handlers import StateHandler
 
 class StateController():
     """
@@ -49,6 +49,7 @@ class StateController():
         data = {"file": f"{file_name}"}
         headers = {'content-type': 'application/json'}
         url = self.__base_api + 'create/'
+        #print(data)
 
         # sends a post request to the url endpoint
         # with above data and headers
@@ -58,13 +59,15 @@ class StateController():
         # collects response data
         # and prints an output
         if request.status_code == 201:
-            json_response = request.json()
-            proj_name = json_response.get('project_name')
-            state_id = json_response.get('id')
+            state = request.json()
+            proj_name = state.get('project_name')
+            state_id = state.get('id')
             print(f"created new state [project_name: {proj_name}, id: {state_id}]'",
                   f"\nrun 'arm -s activate {state_id}' and then run 'source scripts/env' load environmental vairables")
+            #print(state)
+            StateHandler().provisionEnv(state)
         else:
-            print("error: something went wrong")
+            print(f"error: something went wrong {request.json()}")
 
     def activate(self, args):
         """

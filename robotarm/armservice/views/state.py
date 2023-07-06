@@ -11,6 +11,7 @@ from flask import (
     request
 )
 from robotarm.armservice.views import api_views
+import asyncio
 
 # TODO: deactivate state api
 # TODO: delete state api
@@ -27,7 +28,7 @@ def states():
 
 
 @api_views.route('/states/create/', methods=['POST'], strict_slashes=False)
-def create_state():
+async def create_state():
     """
     Creates a new state object from a yaml file
     """
@@ -41,8 +42,8 @@ def create_state():
             return 'Missing file', 400
     try:
         state = StateHandler().createState(**kwargs)
-    except TypeError as e:
-        raise(e)
+    except TypeError as error:
+        return make_response(jsonify(error))
         # return "Not a JSON", 400
 
     return make_response(jsonify(state.to_dict()), 201)

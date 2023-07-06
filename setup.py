@@ -11,7 +11,7 @@ setup(
 
     name="robotarm", # Replace with your username
 
-    version="0.1.9",
+    version="0.2.0",
 
     author="<Aaron Ahmid Balogun>",
 
@@ -54,7 +54,7 @@ setup(
     ],
     },
     scripts=['robotarm/arm.py',
-             'robotarm/scripts/start_arm_api.py'
+             'robotarm/scripts/install_postgresql_server.sh'
     #'robotarm/scripts/start_arm_api.py',
    ]
 

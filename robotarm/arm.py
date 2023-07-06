@@ -108,7 +108,7 @@ garbage command option\n\narm [-option, --option] \
                 except KeyError:
                     function = eval(keyword_option['execute'])
                     function(args)
-                exit()
+                #exit()
             if keyword_option is API_SERVICE_CONTROLLERS:
                 function = eval(keyword_option[args[0]])
                 function()

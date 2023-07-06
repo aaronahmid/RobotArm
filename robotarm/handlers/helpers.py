@@ -23,8 +23,14 @@ setup_db_file = 'setupdb'
 def install_db():
     """installs a database by running script
     """
-    install_pgsql = ['./scripts/install_postgresql_server']
-    subprocess.run(install_pgsql, cwd=BASE_DIR)
+    print(BASE_DIR)
+    install = f'bash/install_postgresql_server.sh'.split('/')
+    with open('logfile', mode='w+', encoding='utf8') as logfile:
+        try:
+            os.system(f"cd {BASE_DIR}/scripts/ ; {' '.join(install)}")
+        except Exception:
+            raise(Exception)
+
 
 
 def create_db(db_name: str, user: str, h=None, p=None, E=None):
@@ -59,7 +65,7 @@ def mkVenvLinux(vpath):
     """
     Creates a python virtual environment on linux
     """
-    #print(vpath)
+    # print(vpath)
     if os.path.isdir(vpath):
         print('virtual env exists, activate it instead')
         return False
@@ -67,7 +73,8 @@ def mkVenvLinux(vpath):
     try:
         try:
             with open('logfile', mode='w', encoding='utf8') as file:
-                subprocess.Popen(['virtualenv', f'{vpath}'], stdout=file, stderr=file)
+                subprocess.Popen(
+                    ['virtualenv', f'{vpath}'], stdout=file, stderr=file)
             os.mkdir('scripts')
             with open('scripts/env', mode='w', encoding='utf8') as file:
                 text = f"#!/bin/bash\nsource {vpath}/bin/activate\nalias activate='source {vpath}/bin/activate'"
@@ -85,28 +92,30 @@ def mkVenvLinux(vpath):
 # TODO: fix database helper
 
 
-def postgresCreate(db_name, db_user, db_host='localhost', db_port='5432', password=None):
+def postgresCreate(name, user, host='localhost', port='5432', password=None) -> bool:
     """
     creates a postgresql database
     """
-    idb = input('install a postgresql db (y/n)? ')
-    if idb != ('n', 'No', 'no', 'NO'):
-        try:
-            install_db()
-        except Exception as e:
-            print(str(e))
+    print('here')
+    #idb = input('install a postgresql db (y/n)? ')
+    # if idb != ('n', 'No', 'no', 'NO'):
+    try:
+        install_db()
+    except Exception as e:
+        print(str(e))
 
-    cdb = input('create a postgresql database (y/n)? ')
-    if cdb != ('n', 'No', 'no', 'NO'):
+    #cdb = input('create a postgresql database (y/n)? ')
+    # if cdb != ('n', 'No', 'no', 'NO'):
         #dbname = input('dbname default(proj-dev-db-local1): ')
         #username = input('user: ')
         #host = input('host default(localhost): ')
         #port = input('port default(5432): ')
         #econding = input('encoding default(utf8): ')
-        if db_user.startswith('[') and db_user.endswith(']'):
-            db_user = db_user.strip('[]')
-            db_user = getenv(db_user)
-        try:
-            create_db(db_name=db_name, user=db_user)
-        except Exception as e:
-            print(str(e))
+    if user.startswith('[') and user.endswith(']'):
+        user = user.strip('[]')
+        user = getenv(user)
+    try:
+        create_db(db_name=name, user=user)
+    except Exception as e:
+        print(str(e))
+    return True

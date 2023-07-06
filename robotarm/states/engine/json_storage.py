@@ -13,7 +13,7 @@ from robotarm import states
 
 classes = {
     "DjangoState": DjangoState,
-    "BaseStatel": BaseState,
+    "BaseState": BaseState,
     # "FlaskState": FlaskState
 }
 HOME = os.getenv('HOME')

@@ -4,8 +4,10 @@ version: v0.0.1
 wdir: .
 frameworks: none
 
-venvs:
-  - venv
+venvs: 
+  - name: venv
+    dir: .
+    on_create: true
 
 databases:
   - name: error-handler-db

@@ -10,7 +10,7 @@ import os
 from robotarm import states
 import subprocess
 import yaml
-
+import asyncio
 # TODO: make a database handler
 # TODO: implement git init repo method
 # TODO: improve provision environment, make it more interactive
@@ -93,11 +93,25 @@ class StateHandler:
         """
         file_name = kwargs['file']
         yaml_dict = self.parseYamlFile(file_name)
-
+        #print(yaml_dict)
         if yaml_dict:
             framework = yaml_dict.get('framework', None)
+            print(framework)
+            if framework != None:
+                if framework in self.SUPPORTED_FRAMEWORKS.keys():
+                    state = BaseState(**yaml_dict)
+                    state.save()
+                    print('---state saved---')
 
-            if framework and framework in self.SUPPORTED_FRAMEWORKS.keys():
+                    # print('activating state...')
+                    # state = self.activate(state.id)
+                    #print(f'{state.project_name} activated')
+
+                    #print('setting up environment, this may take a few minutes...')
+                    #self.provisionEnv(state)
+                    #print('done.')
+
+            else:
                 state = BaseState(**yaml_dict)
                 state.save()
                 print('---state saved---')
@@ -106,24 +120,11 @@ class StateHandler:
                 # state = self.activate(state.id)
                 #print(f'{state.project_name} activated')
 
-                print('setting up environment, this may take a few minutes...')
-                self.provisionEnv(state)
-                print('done.')
-                return state
-            else:
-                state = eval(self.SUPPORTED_FRAMEWORKS[framework])(**yaml_dict)
-                state.save()
-                print('---state saved---')
-
-                # print('activating state...')
-                # state = self.activate(state.id)
-                #print(f'{state.project_name} activated')
-
-                print('setting up environment, this may take a few minutes...')
-                self.provisionEnv(state)
-                print('done.')
-                return state
-                exit('Unsurppoted framework')
+                #print('setting up environment, this may take a few minutes...')
+                #self.provisionEnv(state)
+                #print('done.')
+        return state
+                #xit('Unsurppoted framework')
 
     def deleteState(self, id):
         """
@@ -180,13 +181,16 @@ class StateHandler:
     
     def setup_database(self, type: str, database_config: dict) -> bool:
         try:
-            function = eval(self.SUPPORTED_DATABASE['type'])
+            function = eval(self.SUPPORTED_DATABASE[type])
+            database_config.pop('type')
+            database_config.pop('on_create')
             created = function(**database_config)
         except Exception as error:
             raise Exception({'error': 'an error occured while creating database',
                              'details': error})
         return created
 
+    #@staticmethod
     def provisionEnv(self, state):
         """
         provision a development environment based on state object
@@ -194,28 +198,53 @@ class StateHandler:
         Args:
             state [__class__]: a __class__.BaseState object
         """
-        wd = state.wdir
-        if os.path.isdir(wd) and os.getcwd() != wd:
-            os.chdir(wd)
-        
+        try:
+            print('provisioning...')
+            wd = state.get('wdir')
+            #print(wd)
+            if os.path.isdir(wd) and os.getcwd() != wd:
+                os.chdir(wd)
+            
+            if state.get('venvs'):
+                venvs = state.get('venvs')
+                for venv in venvs:
+                    on_create = venv['on_create']
+                    #print(on_create)
+                    if on_create:
+                        name = venv['name']
+                        vpath = f'{wd}/{name}'
+                        if venv['dir'] != '.':
+                            vpath = venv['dir']
+                        created = self.create_virtual_env(name, vpath)
+                        if created:
+                            print(f'created virtual environment at {vpath}')
+                    else:
+                        pass
+            else:
+                pass
+                    
 
-        if state.venvs:
-            answer = input('a virtual environment config was found, would you like\
-                        to create a one (y/n)? ')
-            if answer not in ('n', 'No', 'no', 'NO'):
-                venvs = state.venvs
-                for name in venvs:
-                    vpath = f'{wd}/{name}'
-                    created = self.create_virtual_env(name, vpath)
-                if created:
-                    print(f'created virtual environment at {vpath}')
-                
-
-        if state.databases:
-            answer = input('a database config was found, would you like\
-                        to setup one (y/n)? ')
-            if answer not in ('n', 'No', 'no', 'NO'):
-                databases = state.databases
+            if state.get('databases'):
+                databases = state.get('databases')
                 for database in databases:
-                    self.setup_database()
+                    on_create = database['on_create']
+                    if on_create:
+                        try:
+                            type = database.get('type', None)
+                            config = database
+                            if type:
+                                created = self.setup_database(type, config)
+                            else:
+                                raise('error: database type must be set')
+                        except KeyError:
+                            print(f"error: database type {type}, not supported.")
+                        if created:
+                            print('created database')
+                    else:
+                        pass
+            else:
+                pass
+
+        except Exception as error:
+            print(f'error: {error}')
 

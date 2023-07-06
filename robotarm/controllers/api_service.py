@@ -28,7 +28,9 @@ class APIServiceController():
         """
         try:
             dir = f'{BASE_DIR}/scripts'
+            #print(BASE_DIR)
             with open(f'{BASE_DIR}/logfile', mode='w', encoding='utf8') as file:
+                print("starting api service...(^v^)")
                 subprocess.Popen(
                     ['python3', f'./scripts/{self.__api_start_script}'], stderr=file, cwd=BASE_DIR)
         except Exception as error:
