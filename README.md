@@ -9,7 +9,7 @@ RobotArm is a Python dev configuration management and automation tool that enabl
 - run management commands easily from any directory in your terminal
 - run tests easily from any directory in your terminal
 - manage your virtual environments without breaking a sweat
-- provision development databases easily (currently supports PostgreSQL
+- provision development databases easily (currently onlu supports PostgreSQL)
 
 ## Future Features
 
