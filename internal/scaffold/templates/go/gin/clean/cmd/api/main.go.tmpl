@@ -1,0 +1,25 @@
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/gin-gonic/gin"
+)
+
+// This is a minimal entry point for the Clean Architecture template
+func main() {
+	r := gin.Default()
+	
+	// Add routes here
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+
+	fmt.Println("Starting server...")
+	if err := r.Run(); err != nil {
+		log.Fatal(err)
+	}
+}
