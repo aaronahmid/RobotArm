@@ -1,0 +1,7 @@
+FROM alpine:latest
+WORKDIR /app
+COPY arm /usr/local/bin/arm
+ENV ARM_API_HOST=0.0.0.0
+ENV ARM_API_PORT=5555
+EXPOSE 5555
+CMD ["arm", "service", "run"]
